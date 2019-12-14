@@ -56,7 +56,10 @@ AppState reduce(AppState state, dynamic action) {
         categories: Set.from(action.categories),
         areCategoriesLoading: false,
       );
-
+    case ReloadMfDataList:
+      return state.copyWith(
+        mfdatalist: Set.from(action.mfDatalist),
+      );
     case ReloadColors:
       Set<Color> used = Set.from(action.usedColors);
       return state.copyWith(availableColors: materialColors.difference(used));

@@ -1,5 +1,4 @@
 import 'dart:async';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
@@ -8,6 +7,7 @@ import 'package:sink/common/auth.dart';
 import 'package:sink/main.dart';
 import 'package:sink/models/category.dart';
 import 'package:sink/models/entry.dart';
+import 'package:sink/models/mfData.dart';
 import 'package:sink/redux/actions.dart';
 import 'package:sink/redux/selectors.dart';
 import 'package:sink/redux/state.dart';
@@ -18,6 +18,7 @@ class SinkMiddleware extends MiddlewareClass<AppState> {
   final Authentication auth;
 
   StreamSubscription<QuerySnapshot> categoriesListener;
+  StreamSubscription<QuerySnapshot> mfDataListener;
   StreamSubscription<QuerySnapshot> entryListener;
 
   SinkMiddleware(this.navigatorKey) : this.auth = FirebaseEmailAuthentication();
@@ -34,6 +35,7 @@ class SinkMiddleware extends MiddlewareClass<AppState> {
     } else if (action is SignOut) {
       await categoriesListener?.cancel();
       await entryListener?.cancel();
+      await mfDataListener?.cancel();
       auth
           .signOut()
           .then((_) =>
@@ -54,6 +56,10 @@ class SinkMiddleware extends MiddlewareClass<AppState> {
           .orderBy('name', descending: false)
           .snapshots()
           .listen((qs) => reloadCategories(store, qs));
+
+      mfDataListener = database.mfdatacollection
+          .snapshots()
+          .listen((qs) => reloadMfData(store, qs));
       store.dispatch(LoadFirstEntry());
     } else if (action is LoadFirstEntry) {
       final database = getRepository(store.state);
@@ -76,6 +82,9 @@ class SinkMiddleware extends MiddlewareClass<AppState> {
     } else if (action is CreateCategory) {
       final database = getRepository(store.state);
       database.createCategory(action.category);
+    } else if (action is CreateMf) {
+      final database = getRepository(store.state);
+      database.createMf(action.mf);
     }
 
     next(action);
@@ -113,6 +122,12 @@ class SinkMiddleware extends MiddlewareClass<AppState> {
     event.documents.forEach((ds) => categories.add(Category.fromSnapshot(ds)));
     store.dispatch(ReloadCategories(categories));
     store.dispatch(ReloadColors(categories.map((c) => c.color).toSet()));
+  }
+
+  void reloadMfData(Store<AppState> store, QuerySnapshot event) {
+    Set<MFData> mfDataList = Set();
+    event.documents.forEach((ds) => mfDataList.add(MFData.fromSnapshot(ds)));
+    store.dispatch(ReloadMfDataList(mfDataList));
   }
 
   void loadMonths(Store<AppState> store, QuerySnapshot event) {

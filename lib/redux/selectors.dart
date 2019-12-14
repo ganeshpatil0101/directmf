@@ -6,6 +6,7 @@ import 'package:sink/common/calendar.dart';
 import 'package:sink/common/exceptions.dart';
 import 'package:sink/models/category.dart';
 import 'package:sink/models/entry.dart';
+import 'package:sink/models/mfData.dart';
 import 'package:sink/redux/state.dart';
 import 'package:sink/repository/firestore.dart';
 
@@ -17,6 +18,8 @@ Set<Color> getUsedColors(AppState state) =>
 Set<Color> getAvailableColors(AppState state) => state.availableColors;
 
 Set<Category> getCategories(AppState state) => state.categories;
+
+Set<MFData> getMfDataList(AppState state) => state.mfdatalist;
 
 Set<Category> getExpenseCategories(AppState state) => state.categories
     .where((category) => category.type == CategoryType.EXPENSE)

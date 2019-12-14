@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:sink/models/category.dart';
 import 'package:sink/models/entry.dart';
+import 'package:sink/models/mfData.dart';
 
 class FirestoreDatabase {
   static Firestore _db = Firestore.instance;
@@ -8,18 +9,22 @@ class FirestoreDatabase {
   final String userId;
   final CollectionReference entries;
   final CollectionReference categories;
+  final CollectionReference mfdatacollection;
 
   FirestoreDatabase._()
       // For testing only
       : this.userId = '',
         this.entries = null,
-        this.categories = null;
+        this.categories = null,
+        this.mfdatacollection = null;
 
   FirestoreDatabase(this.userId)
       : this.entries =
             _db.collection("users").document(userId).collection("entry"),
         this.categories =
-            _db.collection("users").document(userId).collection("category");
+            _db.collection("users").document(userId).collection("category"),
+        this.mfdatacollection =
+            _db.collection("users").document(userId).collection("mfData");
 
   Stream<QuerySnapshot> getEntriesSnapshot() {
     return entries.orderBy('date', descending: true).snapshots();
@@ -47,6 +52,10 @@ class FirestoreDatabase {
     return categories.orderBy('name', descending: false).getDocuments();
   }
 
+  Future<QuerySnapshot> getMfDataList() async {
+    return mfdatacollection.getDocuments();
+  }
+
   void createCategory(Category category) {
     categories.reference().document(category.id).setData({
       'id': category.id,
@@ -55,6 +64,10 @@ class FirestoreDatabase {
       'color': category.color.value,
       'type': category.type.index,
     });
+  }
+
+  void createMf(MFData mf) {
+    mfdatacollection.reference().document().setData({'name': mf.name});
   }
 }
 

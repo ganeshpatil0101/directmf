@@ -6,6 +6,7 @@ import 'package:sink/common/auth.dart';
 import 'package:sink/common/calendar.dart';
 import 'package:sink/models/category.dart';
 import 'package:sink/models/entry.dart';
+import 'package:sink/models/mfData.dart';
 import 'package:sink/repository/firestore.dart';
 import 'package:sink/theme/palette.dart';
 
@@ -20,6 +21,7 @@ class AppState {
   final String authenticationErrorMessage;
   final List<Entry> removed;
   final Set<Category> categories;
+  final Set<MFData> mfdatalist;
   // TODO: must be at least one default category
   final bool areCategoriesLoading;
   final Set<Color> availableColors;
@@ -37,6 +39,7 @@ class AppState {
     authenticationErrorMessage,
     removed,
     categories,
+    mfdatalist,
     areCategoriesLoading,
     availableColors,
     selectedMonth,
@@ -51,6 +54,7 @@ class AppState {
         this.authenticationErrorMessage = authenticationErrorMessage ?? "",
         this.removed = removed ?? List(),
         this.categories = categories ?? Set(),
+        this.mfdatalist = mfdatalist ?? Set(),
         this.areCategoriesLoading = areCategoriesLoading ?? true,
         this.availableColors = availableColors ?? Set.from(materialColors),
         this.selectedMonth = selectedMonth,
@@ -68,6 +72,7 @@ class AppState {
     String authenticationErrorMessage,
     List<Entry> removed,
     Set<Category> categories,
+    Set<MFData> mfdatalist,
     bool areCategoriesLoading,
     Set<Color> availableColors,
     DoubleLinkedQueueEntry<DateTime> selectedMonth,
@@ -86,6 +91,7 @@ class AppState {
           authenticationErrorMessage ?? this.authenticationErrorMessage,
       removed: removed ?? this.removed,
       categories: categories ?? this.categories,
+      mfdatalist: mfdatalist ?? this.mfdatalist,
       areCategoriesLoading: areCategoriesLoading ?? this.areCategoriesLoading,
       availableColors: availableColors ?? this.availableColors,
       selectedMonth: selectedMonth ?? this.selectedMonth,

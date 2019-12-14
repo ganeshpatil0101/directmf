@@ -59,6 +59,12 @@ class ReloadCategories {
 }
 
 @immutable
+class ReloadMfDataList {
+  final Set<MFData> mfDatalist;
+  ReloadMfDataList(this.mfDatalist);
+}
+
+@immutable
 class ReloadColors {
   final Set<Color> usedColors;
 
