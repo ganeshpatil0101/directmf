@@ -41,6 +41,8 @@ Color getCategoryColor(AppState state, String id) =>
 
 bool areCategoriesLoading(AppState state) => state.areCategoriesLoading;
 
+bool areMfLoading(AppState state) => state.areMfLoading;
+
 DateTime getStatisticsMonthStart(AppState state) =>
     firstDay(state.selectedMonth.element);
 

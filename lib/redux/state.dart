@@ -24,6 +24,7 @@ class AppState {
   final Set<MFData> mfdatalist;
   // TODO: must be at least one default category
   final bool areCategoriesLoading;
+  final bool areMfLoading;
   final Set<Color> availableColors;
   final DoubleLinkedQueueEntry<DateTime> selectedMonth;
   final DoubleLinkedQueue<DateTime> viewableMonths;
@@ -41,6 +42,7 @@ class AppState {
     categories,
     mfdatalist,
     areCategoriesLoading,
+    areMfLoading,
     availableColors,
     selectedMonth,
     viewableMonths,
@@ -57,6 +59,7 @@ class AppState {
         this.mfdatalist = mfdatalist ?? Set(),
         this.areCategoriesLoading = areCategoriesLoading ?? true,
         this.availableColors = availableColors ?? Set.from(materialColors),
+        this.areMfLoading = areCategoriesLoading ?? true,
         this.selectedMonth = selectedMonth,
         this.viewableMonths = viewableMonths ??
             DoubleLinkedQueue.from([firstDay(DateTime.now())]),
@@ -74,6 +77,7 @@ class AppState {
     Set<Category> categories,
     Set<MFData> mfdatalist,
     bool areCategoriesLoading,
+    bool areMfLoading,
     Set<Color> availableColors,
     DoubleLinkedQueueEntry<DateTime> selectedMonth,
     DoubleLinkedQueue<DateTime> viewableMonths,
@@ -93,6 +97,7 @@ class AppState {
       categories: categories ?? this.categories,
       mfdatalist: mfdatalist ?? this.mfdatalist,
       areCategoriesLoading: areCategoriesLoading ?? this.areCategoriesLoading,
+      areMfLoading: areMfLoading ?? this.areMfLoading,
       availableColors: availableColors ?? this.availableColors,
       selectedMonth: selectedMonth ?? this.selectedMonth,
       viewableMonths: viewableMonths ?? this.viewableMonths,
