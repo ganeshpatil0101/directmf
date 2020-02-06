@@ -67,7 +67,15 @@ class FirestoreDatabase {
   }
 
   void createMf(MFData mf) {
-    mfdatacollection.reference().document().setData({'name': mf.name});
+    mfdatacollection.reference().document().setData({
+      'name': mf.name,
+      'folioId': mf.folioId,
+      'mfId': mf.mfId,
+      'amtInvstd': mf.amtInvstd,
+      'units': mf.units,
+      'nav': mf.nav,
+      'curValue': mf.curValue
+    });
   }
 }
 

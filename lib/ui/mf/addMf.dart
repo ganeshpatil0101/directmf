@@ -35,12 +35,12 @@ class AddFmFormState extends State<AddMfForm> {
   }
 
   void handleSave(
-    Function(String) onSave,
+    Function(String, String, String, double, double, double, double) onSave,
     BuildContext context,
   ) {
     print('handleSave Called');
     print(mfName);
-    onSave(mfName);
+    onSave(mfName, folioId, mfId, amtInvstd, units, nav, curValue);
     Navigator.pop(context);
   }
 
@@ -171,7 +171,7 @@ class AddFmFormState extends State<AddMfForm> {
 }
 
 class _ViewModel {
-  final Function(String) onSave;
+  final Function(String, String, String, double, double, double, double) onSave;
 
   _ViewModel({
     @required this.onSave,
@@ -181,12 +181,17 @@ class _ViewModel {
     Store<AppState> store,
   ) {
     return _ViewModel(
-      onSave: (mfName) {
+      onSave: (mfName, folioId, mfId, amtInvstd, units, nav, curValue) {
         store.dispatch(
           CreateMf(
             MFData(
-              name: mfName,
-            ),
+                name: mfName,
+                folioId: folioId,
+                mfId: mfId,
+                amtInvstd: amtInvstd,
+                units: units,
+                nav: nav,
+                curValue: curValue),
           ),
         );
       },
