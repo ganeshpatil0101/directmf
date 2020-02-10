@@ -34,6 +34,10 @@ class FirestoreDatabase {
     return entries.orderBy('date', descending: false).limit(1).snapshots();
   }
 
+  Stream<QuerySnapshot> getMfEntiresSnapshot() {
+    return mfdatacollection.orderBy('name', descending: true).snapshots();
+  }
+
   Stream<QuerySnapshot> snapshotBetween(DateTime from, DateTime to) {
     return entries
         .where('date', isGreaterThanOrEqualTo: from, isLessThanOrEqualTo: to)
