@@ -135,7 +135,7 @@ class AddFmFormState extends State<AddMfForm> {
                               onChange: (value) {
                                 setState(() {
                                   this.nav = value;
-                                  this.curValue = this.amtInvstd * this.nav;
+                                  this.curValue = this.units * this.nav;
                                 });
                               },
                               value: this.nav,
@@ -147,7 +147,7 @@ class AddFmFormState extends State<AddMfForm> {
                           ),
                           Padding(
                             padding: const EdgeInsets.all(16.0),
-                            child: ClearableNumberInput(
+                            /*child: ClearableNumberInput(
                               onChange: (value) {
                                 setState(() {
                                   this.curValue = value;
@@ -158,7 +158,9 @@ class AddFmFormState extends State<AddMfForm> {
                               style: Theme.of(context).textTheme.body1,
                               //contentPadding: inputPadding,
                               border: OutlineInputBorder(),
-                            ),
+                            ),*/
+                            child: Text(this.curValue.toString(),
+                                style: Theme.of(context).textTheme.body1),
                           )
                         ],
                       ),

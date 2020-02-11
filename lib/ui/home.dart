@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:sink/ui/drawer.dart';
 import 'package:sink/ui/entries/add_entry_page.dart';
 import 'package:sink/ui/entries/entries_page.dart';
+import 'package:sink/ui/mf/entity_mf_list.dart';
 import 'package:sink/ui/statistics/statistics_page.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -50,7 +51,8 @@ class HomePageState extends State<HomePage>
       body: TabBarView(
         controller: _tabController,
         children: <Widget>[
-          EntriesPage(),
+          //EntriesPage(),
+          EntityMfList(),
           StatisticsPage(),
         ],
       ),
