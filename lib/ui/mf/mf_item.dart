@@ -9,6 +9,7 @@ import 'package:sink/redux/selectors.dart';
 import 'package:sink/redux/state.dart';
 import 'package:sink/theme/icons.dart';
 import 'package:sink/ui/common/amount.dart';
+import 'package:sink/ui/mf/mf_item_details.dart';
 
 class MfItem extends StatelessWidget {
   final Key key;
@@ -45,7 +46,9 @@ class MfItem extends StatelessWidget {
               Flexible(
                 child: ListTile(
                     title: Text(mf.name),
-                    subtitle: Text(mf.amtInvstd.toString()),
+                    subtitle:
+                        Text("Invested = ${mf.amtInvstd.toStringAsFixed(2)}"),
+                    //subtitle: MfItemDetails(mf.nav, mf.curValue, mf.amtInvstd),
                     trailing: VisualizedAmount(
                       amount: mf.curValue - mf.amtInvstd,
                       income: (mf.curValue - mf.amtInvstd < 0) ? false : true,

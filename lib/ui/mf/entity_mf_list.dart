@@ -42,7 +42,8 @@ class EntityMfList extends StatelessWidget {
                 physics: BouncingScrollPhysics(),
                 shrinkWrap: true,
                 padding: EdgeInsets.all(8.0),
-                children: chw, //TODO
+                children: ListTile.divideTiles(context: context, tiles: chw)
+                    .toList(), //TODO
               ),
             );
           },
