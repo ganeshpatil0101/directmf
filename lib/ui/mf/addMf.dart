@@ -28,6 +28,8 @@ class AddMfForm extends StatefulWidget {
 class AddFmFormState extends State<AddMfForm> {
   String mfName, mfId, folioId;
   double amtInvstd, units, nav, curValue;
+  var curValController = TextEditingController();
+  var mfIdController = TextEditingController();
   void handleNameChange(String newName) {
     setState(() {
       this.mfName = newName;
@@ -73,97 +75,142 @@ class AddFmFormState extends State<AddMfForm> {
                     children: <Widget>[
                   Padding(
                     padding: const EdgeInsets.all(8.0),
-                    child: Card(
-                      child: Column(
-                        children: <Widget>[
-                          Padding(
-                            padding: const EdgeInsets.all(16.0),
-                            child: ClearableTextInput(
-                              hintText: "Mf Name",
-                              onChange: (value) => handleNameChange(value),
-                            ),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.all(16.0),
-                            child: ClearableTextInput(
-                              hintText: "Mf Id",
+                    child: Column(
+                      children: <Widget>[
+                        /*Padding(
+                          padding: const EdgeInsets.all(16.0),
+                          child: ListTile(
+                            contentPadding: EdgeInsets.all(0),
+                            title: ClearableTextInput(
+                              contentPadding:
+                                  EdgeInsets.fromLTRB(10, 15, 10, 15),
+                              hintText: "Enter 6 Digit ID & Search",
+                              labelText: "MF ID",
                               onChange: (value) =>
                                   {setState(() => this.mfId = value)},
                             ),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.all(16.0),
-                            child: ClearableTextInput(
-                              hintText: "Folio Number",
-                              onChange: (value) =>
-                                  {setState(() => this.folioId = value)},
+                            trailing: IconButton(
+                              icon: Icon(Icons.search),
+                              onPressed: () => {print("Search MF By ID")},
                             ),
                           ),
-                          Padding(
-                            padding: const EdgeInsets.all(16.0),
-                            child: ClearableNumberInput(
-                              onChange: (value) {
-                                setState(() {
-                                  this.amtInvstd = value;
-                                });
-                              },
-                              value: this.amtInvstd,
-                              hintText: 'Amount Invested',
-                              style: Theme.of(context).textTheme.body1,
-                              //contentPadding: inputPadding,
-                              border: OutlineInputBorder(),
-                            ),
+                        ),*/
+                        Padding(
+                          padding: const EdgeInsets.all(16.0),
+                          child: TextFormField(
+                            controller: mfIdController,
+                            decoration: InputDecoration(
+                                hintText: "Enter 6 Digit ID & Search",
+                                labelText: "MF ID",
+                                border: OutlineInputBorder(),
+                                suffixIcon: IconButton(
+                                  icon: Icon(Icons.search),
+                                  disabledColor: Colors.transparent,
+                                  onPressed: () => {
+                                    print(
+                                        "Search by mf id ${mfIdController.text}")
+                                  },
+                                )),
                           ),
-                          Padding(
-                            padding: const EdgeInsets.all(16.0),
-                            child: ClearableNumberInput(
-                              onChange: (value) {
-                                setState(() {
-                                  this.units = value;
-                                });
-                              },
-                              value: this.units,
-                              hintText: 'Total Units',
-                              style: Theme.of(context).textTheme.body1,
-                              //contentPadding: inputPadding,
-                              border: OutlineInputBorder(),
-                            ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.all(16.0),
+                          child: ClearableTextInput(
+                            hintText: "Mutual Fund Name",
+                            labelText: "MF Name",
+                            onChange: (value) => handleNameChange(value),
                           ),
-                          Padding(
-                            padding: const EdgeInsets.all(16.0),
-                            child: ClearableNumberInput(
-                              onChange: (value) {
-                                setState(() {
-                                  this.nav = value;
-                                  this.curValue = this.units * this.nav;
-                                });
-                              },
-                              value: this.nav,
-                              hintText: 'Current Nav',
-                              style: Theme.of(context).textTheme.body1,
-                              //contentPadding: inputPadding,
-                              border: OutlineInputBorder(),
-                            ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.all(16.0),
+                          child: ClearableTextInput(
+                            hintText: "Folio Number",
+                            labelText: "Folio Number",
+                            onChange: (value) =>
+                                {setState(() => this.folioId = value)},
                           ),
-                          Padding(
-                            padding: const EdgeInsets.all(16.0),
-                            /*child: ClearableNumberInput(
-                              onChange: (value) {
-                                setState(() {
-                                  this.curValue = value;
-                                });
-                              },
-                              value: this.curValue,
-                              hintText: 'Current Valuation',
-                              style: Theme.of(context).textTheme.body1,
-                              //contentPadding: inputPadding,
-                              border: OutlineInputBorder(),
-                            ),*/
-                            child: Text(this.curValue.toString(),
-                                style: Theme.of(context).textTheme.body1),
-                          )
-                        ],
-                      ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.all(16.0),
+                          child: ClearableNumberInput(
+                            onChange: (value) {
+                              setState(() {
+                                this.amtInvstd = value;
+                              });
+                            },
+                            value: this.amtInvstd,
+                            hintText: 'Amount Invested',
+                            labelText: 'Amount Invested',
+                            style: Theme.of(context).textTheme.body1,
+                            //contentPadding: inputPadding,
+                            border: OutlineInputBorder(),
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.all(16.0),
+                          child: ClearableNumberInput(
+                            onChange: (value) {
+                              setState(() {
+                                this.units = value;
+                              });
+                            },
+                            value: this.units,
+                            hintText: 'Total Units',
+                            labelText: 'Total Units',
+                            style: Theme.of(context).textTheme.body1,
+                            //contentPadding: inputPadding,
+                            border: OutlineInputBorder(),
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.all(16.0),
+                          child: ClearableNumberInput(
+                            onChange: (value) {
+                              setState(() {
+                                this.nav = value;
+                                this.curValue = this.units * this.nav;
+                                curValController.text =
+                                    this.curValue.toStringAsFixed(2);
+                              });
+                            },
+                            value: this.nav,
+                            hintText: 'Current Nav Price',
+                            labelText: 'Current Nav',
+                            style: Theme.of(context).textTheme.body1,
+                            //contentPadding: inputPadding,
+                            border: OutlineInputBorder(),
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.all(16.0),
+                          /*child: ClearableNumberInput(
+                            onChange: (value) {
+                              setState(() {
+                                this.curValue = value;
+                              });
+                            },
+                            enabled: false,
+                            value: this.curValue,
+                            hintText: 'Current Valuation',
+                            labelText: 'Current Valuation',
+                            style: Theme.of(context).textTheme.body1,
+                            //contentPadding: inputPadding,
+                            border: OutlineInputBorder(),
+                          ),
+                          */
+                          child: TextFormField(
+                            controller: curValController,
+                            enabled: false,
+                            decoration: InputDecoration(
+                                enabled: false, labelText: "Current Valuation"),
+                          ),
+                          /*child: Text(
+                            (this.curValue != null) ? this.curValue.toStringAsFixed(2) : "",
+                            style: Theme.of(context).textTheme.body1,
+                            semanticsLabel: "Current Value",
+                          ),*/
+                        )
+                      ],
                     ),
                   ),
                 ])));

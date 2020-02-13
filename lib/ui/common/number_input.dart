@@ -10,15 +10,18 @@ class ClearableNumberInput extends StatefulWidget {
   final TextStyle style;
   final EdgeInsetsGeometry contentPadding;
   final InputBorder border;
+  final String labelText;
+  final bool enabled;
 
-  ClearableNumberInput({
-    @required this.onChange,
-    @required this.value,
-    @required this.hintText,
-    this.style,
-    this.contentPadding,
-    this.border,
-  });
+  ClearableNumberInput(
+      {@required this.onChange,
+      @required this.value,
+      @required this.hintText,
+      this.style,
+      this.contentPadding,
+      this.border,
+      this.labelText,
+      this.enabled});
 
   @override
   State<StatefulWidget> createState() => _ClearableNumberInputState(value);
@@ -68,8 +71,10 @@ class _ClearableNumberInputState extends State<ClearableNumberInput> {
       style: widget.style,
       focusNode: _focus,
       decoration: InputDecoration(
+        enabled: (widget.enabled) ?? true,
         contentPadding: widget.contentPadding ?? EdgeInsets.all(16.0),
         hintText: widget.hintText,
+        labelText: (widget.labelText) ?? '',
         border: widget.border ?? InputBorder.none,
         isDense: true,
         suffixIcon: focused

@@ -12,18 +12,19 @@ class ClearableTextInput extends StatefulWidget {
   final EdgeInsetsGeometry contentPadding;
   final InputBorder border;
   final bool obscureText;
+  final String labelText;
 
-  ClearableTextInput({
-    @required this.onChange,
-    @required this.hintText,
-    this.value,
-    this.style,
-    this.keyboardType,
-    this.maxLines,
-    this.contentPadding,
-    this.border,
-    this.obscureText,
-  });
+  ClearableTextInput(
+      {@required this.onChange,
+      @required this.hintText,
+      this.value,
+      this.style,
+      this.keyboardType,
+      this.maxLines,
+      this.contentPadding,
+      this.border,
+      this.obscureText,
+      this.labelText});
 
   @override
   State<StatefulWidget> createState() => _TextInputState(value);
@@ -76,6 +77,7 @@ class _TextInputState extends State<ClearableTextInput> {
       decoration: InputDecoration(
         contentPadding: widget.contentPadding,
         hintText: widget.hintText,
+        labelText: (widget.labelText) ?? '',
         border: widget.border ?? OutlineInputBorder(),
         isDense: true,
         suffixIcon: focused
