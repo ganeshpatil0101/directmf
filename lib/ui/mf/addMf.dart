@@ -7,7 +7,9 @@ import 'package:sink/models/mfData.dart';
 import 'package:sink/redux/actions.dart';
 import 'package:sink/redux/selectors.dart';
 import 'package:sink/redux/state.dart';
+import 'package:sink/services/mf_api_service.dart';
 import 'package:sink/ui/common/number_input.dart';
+import 'package:sink/ui/common/progress_indicator.dart';
 import 'package:sink/ui/common/text_input.dart';
 import 'package:sink/ui/forms/color_grid.dart';
 import 'package:uuid/uuid.dart';
@@ -28,8 +30,12 @@ class AddMfForm extends StatefulWidget {
 class AddFmFormState extends State<AddMfForm> {
   String mfName, mfId, folioId;
   double amtInvstd, units, nav, curValue;
+  bool showLoading = false;
   var curValController = TextEditingController();
   var mfIdController = TextEditingController();
+  var mfNameCtrl = TextEditingController();
+  var api = new MfApiService();
+
   void handleNameChange(String newName) {
     setState(() {
       this.mfName = newName;
@@ -41,9 +47,22 @@ class AddFmFormState extends State<AddMfForm> {
     BuildContext context,
   ) {
     print('handleSave Called');
-    print(mfName);
-    onSave(mfName, folioId, mfId, amtInvstd, units, nav, curValue);
+    print(mfNameCtrl.text);
+    onSave(mfNameCtrl.text, folioId, mfIdController.text, amtInvstd, units, nav,
+        curValue);
     Navigator.pop(context);
+  }
+
+  void searchMfById(mfId) async {
+    setState(() {
+      this.showLoading = true;
+    });
+    var res = await api.getMfDetailsByMfId(mfId);
+    print(res);
+    mfNameCtrl.text = res.name;
+    setState(() {
+      this.showLoading = false;
+    });
   }
 
   @override
@@ -52,6 +71,10 @@ class AddFmFormState extends State<AddMfForm> {
     return StoreConnector<AppState, _ViewModel>(
       converter: (state) => _ViewModel.fromState(state),
       builder: (BuildContext context, _ViewModel vm) {
+        if (showLoading) {
+          return PaddedCircularProgressIndicator();
+        }
+
         return Scaffold(
             appBar: AppBar(
               backgroundColor: Theme.of(context).backgroundColor,
@@ -61,7 +84,7 @@ class AddFmFormState extends State<AddMfForm> {
                   disabledColor: Colors.grey,
                   iconSize: 28.0,
                   icon: Icon(Icons.check),
-                  onPressed: !isBlank(mfName)
+                  onPressed: !isBlank(mfIdController.text)
                       ? () => handleSave(vm.onSave, context)
                       : null,
                 ),
@@ -106,10 +129,8 @@ class AddFmFormState extends State<AddMfForm> {
                                 suffixIcon: IconButton(
                                   icon: Icon(Icons.search),
                                   disabledColor: Colors.transparent,
-                                  onPressed: () => {
-                                    print(
-                                        "Search by mf id ${mfIdController.text}")
-                                  },
+                                  onPressed: () =>
+                                      {searchMfById(mfIdController.text)},
                                 )),
                           ),
                         ),
@@ -118,6 +139,7 @@ class AddFmFormState extends State<AddMfForm> {
                           child: ClearableTextInput(
                             hintText: "Mutual Fund Name",
                             labelText: "MF Name",
+                            textCtrl: mfNameCtrl,
                             onChange: (value) => handleNameChange(value),
                           ),
                         ),
@@ -231,6 +253,8 @@ class _ViewModel {
   ) {
     return _ViewModel(
       onSave: (mfName, folioId, mfId, amtInvstd, units, nav, curValue) {
+        print(
+            "$mfId : $mfName : $folioId : $amtInvstd : $units : $nav : $curValue ");
         store.dispatch(
           CreateMf(
             MFData(

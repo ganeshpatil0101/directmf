@@ -6,7 +6,9 @@ class PaddedCircularProgressIndicator extends StatelessWidget {
     return Center(
       child: Padding(
         padding: const EdgeInsets.all(8.0),
-        child: CircularProgressIndicator(),
+        child: CircularProgressIndicator(
+          backgroundColor: Colors.white,
+        ),
       ),
     );
   }

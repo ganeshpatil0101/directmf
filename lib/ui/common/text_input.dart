@@ -13,6 +13,7 @@ class ClearableTextInput extends StatefulWidget {
   final InputBorder border;
   final bool obscureText;
   final String labelText;
+  final TextEditingController textCtrl;
 
   ClearableTextInput(
       {@required this.onChange,
@@ -24,7 +25,8 @@ class ClearableTextInput extends StatefulWidget {
       this.contentPadding,
       this.border,
       this.obscureText,
-      this.labelText});
+      this.labelText,
+      this.textCtrl});
 
   @override
   State<StatefulWidget> createState() => _TextInputState(value);
@@ -65,7 +67,7 @@ class _TextInputState extends State<ClearableTextInput> {
   @override
   Widget build(BuildContext context) {
     return TextField(
-      controller: _controller,
+      controller: widget.textCtrl ?? _controller,
       textInputAction: TextInputAction.done,
       textCapitalization: TextCapitalization.sentences,
       obscureText: widget.obscureText ?? false,
