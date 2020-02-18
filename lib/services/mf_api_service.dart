@@ -25,14 +25,16 @@ class MfApiService {
 
   getLine(List arrData, String mfId) {
     var d = [];
+    var count = 0;
     for (final dt in arrData) {
       var indx = dt.indexOf(mfId);
       if (indx > -1) {
         print("found index ");
-        d = arrData[indx].split(';');
+        d = arrData[count].split(';');
         print(d);
         break;
       }
+      count++;
     }
     return d;
   }

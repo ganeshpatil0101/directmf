@@ -60,6 +60,7 @@ class AddFmFormState extends State<AddMfForm> {
     var res = await api.getMfDetailsByMfId(mfId);
     print(res);
     mfNameCtrl.text = res.name;
+    curValController.text = res.nav.toStringAsFixed(2);
     setState(() {
       this.showLoading = false;
     });
@@ -205,21 +206,6 @@ class AddFmFormState extends State<AddMfForm> {
                         ),
                         Padding(
                           padding: const EdgeInsets.all(16.0),
-                          /*child: ClearableNumberInput(
-                            onChange: (value) {
-                              setState(() {
-                                this.curValue = value;
-                              });
-                            },
-                            enabled: false,
-                            value: this.curValue,
-                            hintText: 'Current Valuation',
-                            labelText: 'Current Valuation',
-                            style: Theme.of(context).textTheme.body1,
-                            //contentPadding: inputPadding,
-                            border: OutlineInputBorder(),
-                          ),
-                          */
                           child: TextFormField(
                             controller: curValController,
                             enabled: false,

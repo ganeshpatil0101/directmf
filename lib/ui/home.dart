@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_beautiful_popup/main.dart';
 import 'package:sink/ui/drawer.dart';
 import 'package:sink/ui/entries/add_entry_page.dart';
 import 'package:sink/ui/entries/entries_page.dart';
+import 'package:sink/ui/mf/addMf.dart';
 import 'package:sink/ui/mf/entity_mf_list.dart';
 import 'package:sink/ui/statistics/statistics_page.dart';
 
@@ -39,6 +41,10 @@ class HomePageState extends State<HomePage>
 
   @override
   Widget build(BuildContext context) {
+    var popup = BeautifulPopup(
+      context: context,
+      template: TemplateBlueRocket,
+    );
     return Scaffold(
       drawer: HomeDrawer(),
       extendBody: true,
@@ -58,13 +64,32 @@ class HomePageState extends State<HomePage>
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       floatingActionButton: FloatingActionButton(
-        tooltip: 'Add an expense',
-        isExtended: true,
-        backgroundColor: Colors.white,
-        foregroundColor: Colors.black,
-        child: Icon(Icons.add),
-        onPressed: () => Navigator.pushNamed(context, AddExpensePage.route),
-      ),
+          tooltip: 'Add an expense',
+          isExtended: true,
+          backgroundColor: Colors.white,
+          foregroundColor: Colors.black,
+          child: Icon(Icons.add),
+          //onPressed: () => Navigator.pushNamed(context, AddExpensePage.route),
+          onPressed: () => {
+                popup.show(
+                  title: 'Auto OR Manual',
+                  content:
+                      'Do you want to upload a CAMS CDSL / NSDL  statement \n OR \n create Mutual Fund Manually.',
+                  actions: [
+                    popup.button(
+                      label: 'Upload',
+                      onPressed: Navigator.of(context).pop,
+                    ),
+                    popup.button(
+                        label: 'Manually',
+                        onPressed: () => Navigator.of(context).pop
+                        // Navigator.pushNamed(context, AddMfFormPage.route)),
+                        )
+                  ],
+                  // bool barrierDismissible = false,
+                  // Widget close,
+                )
+              }),
       bottomNavigationBar: BottomAppBar(
         notchMargin: 5.0,
         clipBehavior: Clip.antiAlias,
