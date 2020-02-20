@@ -14,6 +14,7 @@ import 'package:sink/ui/forms/category_form.dart';
 import 'package:sink/ui/forms/registration.dart';
 import 'package:sink/ui/forms/signin.dart';
 import 'package:sink/ui/home.dart';
+import 'package:sink/ui/mf/addEditMfPage.dart';
 import 'package:sink/ui/mf/addMf.dart';
 import 'package:sink/ui/mf/mfList.dart';
 
@@ -50,9 +51,9 @@ class Sink extends StatelessWidget {
           CategoryList.route: (context) => CategoryList(),
           MfList.route: (context) => MfList(),
           CategoryForm.route: (context) => CategoryForm(),
-          AddMfForm.route: (context) => AddMfForm(),
           HomeScreen.route: (context) => HomeScreen(),
           AddExpensePage.route: (context) => AddExpensePage(),
+          AddEditMfPage.route: (context) => AddEditMfPage(),
           EditExpensePage.route: (context) => EditExpensePage(),
         },
         initialRoute: InitialPage.route,

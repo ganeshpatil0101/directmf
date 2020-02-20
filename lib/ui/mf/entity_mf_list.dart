@@ -30,12 +30,10 @@ class EntityMfList extends StatelessWidget {
             List<DocumentSnapshot> snapshots = snapshot.data.documents;
             var ch = snapshots.map((s) {
               MFData mf = MFData.fromSnapshot(s);
-              print(mf.name);
               return MfItem(mf);
             });
             List<Widget> chw = [];
             chw.addAll(ch);
-            print(ch);
 
             return Scrollbar(
               child: ListView(

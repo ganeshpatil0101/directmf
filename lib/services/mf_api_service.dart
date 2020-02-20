@@ -26,12 +26,11 @@ class MfApiService {
   getLine(List arrData, String mfId) {
     var d = [];
     var count = 0;
+    // TODO improve login by removing for and use regex to get line number remove count
     for (final dt in arrData) {
       var indx = dt.indexOf(mfId);
       if (indx > -1) {
-        print("found index ");
         d = arrData[count].split(';');
-        print(d);
         break;
       }
       count++;

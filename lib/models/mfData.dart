@@ -20,13 +20,23 @@ class MFData {
     @required this.nav,
     @required this.curValue,
   });
+  static empty() {
+    return MFData(
+        mfId: '',
+        folioId: '',
+        name: '',
+        amtInvstd: 0,
+        units: 0,
+        nav: 0,
+        curValue: 0);
+  }
 
   static fromSnapshot(DocumentSnapshot document) {
     return MFData(
         //id: document['id'],
         name: document['name'],
         folioId: document['folioId'],
-        mfId: document['mdId'],
+        mfId: document['mfId'],
         amtInvstd: document['amtInvstd'],
         units: document['units'],
         nav: document['nav'],

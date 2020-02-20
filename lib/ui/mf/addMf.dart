@@ -21,20 +21,36 @@ import 'package:uuid/uuid.dart';
 // }
 
 class AddMfForm extends StatefulWidget {
-  static const route = '/addMfForm';
+  final Function onSave;
+  final MFData data;
 
+  AddMfForm({@required this.onSave, @required this.data});
   @override
-  AddFmFormState createState() => AddFmFormState();
+  AddFmFormState createState() => AddFmFormState(this.data);
 }
 
 class AddFmFormState extends State<AddMfForm> {
   String mfName, mfId, folioId;
   double amtInvstd, units, nav, curValue;
   bool showLoading = false;
-  var curValController = TextEditingController();
-  var mfIdController = TextEditingController();
-  var mfNameCtrl = TextEditingController();
+  var curValController = TextEditingController(),
+      mfIdController = TextEditingController(),
+      mfNameCtrl = TextEditingController(),
+      navCtrl = TextEditingController();
   var api = new MfApiService();
+
+  final MFData data;
+  AddFmFormState(this.data) {
+    print('======');
+    print(data.mfId);
+    mfIdController.text = data.mfId;
+    mfNameCtrl.text = data.name;
+    curValController.text = data.curValue.toStringAsFixed(2);
+    navCtrl.text = data.nav.toStringAsFixed(3);
+    amtInvstd = data.amtInvstd;
+    units = data.units;
+    folioId = data.folioId;
+  }
 
   void handleNameChange(String newName) {
     setState(() {
@@ -46,10 +62,8 @@ class AddFmFormState extends State<AddMfForm> {
     Function(String, String, String, double, double, double, double) onSave,
     BuildContext context,
   ) {
-    print('handleSave Called');
-    print(mfNameCtrl.text);
-    onSave(mfNameCtrl.text, folioId, mfIdController.text, amtInvstd, units, nav,
-        curValue);
+    onSave(mfNameCtrl.text, folioId, mfIdController.text, amtInvstd, units,
+        double.parse(navCtrl.text), double.parse(curValController.text));
     Navigator.pop(context);
   }
 
@@ -58,9 +72,8 @@ class AddFmFormState extends State<AddMfForm> {
       this.showLoading = true;
     });
     var res = await api.getMfDetailsByMfId(mfId);
-    print(res);
     mfNameCtrl.text = res.name;
-    curValController.text = res.nav.toStringAsFixed(2);
+    navCtrl.text = res.nav.toStringAsFixed(2);
     setState(() {
       this.showLoading = false;
     });
@@ -101,24 +114,6 @@ class AddFmFormState extends State<AddMfForm> {
                     padding: const EdgeInsets.all(8.0),
                     child: Column(
                       children: <Widget>[
-                        /*Padding(
-                          padding: const EdgeInsets.all(16.0),
-                          child: ListTile(
-                            contentPadding: EdgeInsets.all(0),
-                            title: ClearableTextInput(
-                              contentPadding:
-                                  EdgeInsets.fromLTRB(10, 15, 10, 15),
-                              hintText: "Enter 6 Digit ID & Search",
-                              labelText: "MF ID",
-                              onChange: (value) =>
-                                  {setState(() => this.mfId = value)},
-                            ),
-                            trailing: IconButton(
-                              icon: Icon(Icons.search),
-                              onPressed: () => {print("Search MF By ID")},
-                            ),
-                          ),
-                        ),*/
                         Padding(
                           padding: const EdgeInsets.all(16.0),
                           child: TextFormField(
@@ -149,8 +144,14 @@ class AddFmFormState extends State<AddMfForm> {
                           child: ClearableTextInput(
                             hintText: "Folio Number",
                             labelText: "Folio Number",
-                            onChange: (value) =>
-                                {setState(() => this.folioId = value)},
+                            onChange: (value) => {
+                              setState(() {
+                                this.folioId = value;
+                              })
+                            },
+                            value: this.folioId,
+                            style: Theme.of(context).textTheme.body1,
+                            border: OutlineInputBorder(),
                           ),
                         ),
                         Padding(
@@ -188,6 +189,7 @@ class AddFmFormState extends State<AddMfForm> {
                         Padding(
                           padding: const EdgeInsets.all(16.0),
                           child: ClearableNumberInput(
+                            textCtrl: navCtrl,
                             onChange: (value) {
                               setState(() {
                                 this.nav = value;
@@ -200,7 +202,6 @@ class AddFmFormState extends State<AddMfForm> {
                             hintText: 'Current Nav Price',
                             labelText: 'Current Nav',
                             style: Theme.of(context).textTheme.body1,
-                            //contentPadding: inputPadding,
                             border: OutlineInputBorder(),
                           ),
                         ),
@@ -212,11 +213,6 @@ class AddFmFormState extends State<AddMfForm> {
                             decoration: InputDecoration(
                                 enabled: false, labelText: "Current Valuation"),
                           ),
-                          /*child: Text(
-                            (this.curValue != null) ? this.curValue.toStringAsFixed(2) : "",
-                            style: Theme.of(context).textTheme.body1,
-                            semanticsLabel: "Current Value",
-                          ),*/
                         )
                       ],
                     ),

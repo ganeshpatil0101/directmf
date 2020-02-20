@@ -3,6 +3,7 @@ import 'package:flutter_beautiful_popup/main.dart';
 import 'package:sink/ui/drawer.dart';
 import 'package:sink/ui/entries/add_entry_page.dart';
 import 'package:sink/ui/entries/entries_page.dart';
+import 'package:sink/ui/mf/addEditMfPage.dart';
 import 'package:sink/ui/mf/addMf.dart';
 import 'package:sink/ui/mf/entity_mf_list.dart';
 import 'package:sink/ui/statistics/statistics_page.dart';
@@ -81,10 +82,11 @@ class HomePageState extends State<HomePage>
                       onPressed: Navigator.of(context).pop,
                     ),
                     popup.button(
-                        label: 'Manually',
-                        onPressed: () => Navigator.of(context).pop
-                        // Navigator.pushNamed(context, AddMfFormPage.route)),
-                        )
+                      label: 'Manually',
+                      onPressed: () =>
+                          Navigator.pushNamed(context, AddEditMfPage.route),
+                      // Navigator.pushNamed(context, AddMfFormPage.route)),
+                    )
                   ],
                   // bool barrierDismissible = false,
                   // Widget close,

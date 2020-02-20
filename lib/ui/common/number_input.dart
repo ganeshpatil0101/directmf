@@ -12,6 +12,7 @@ class ClearableNumberInput extends StatefulWidget {
   final InputBorder border;
   final String labelText;
   final bool enabled;
+  final TextEditingController textCtrl;
 
   ClearableNumberInput(
       {@required this.onChange,
@@ -21,7 +22,8 @@ class ClearableNumberInput extends StatefulWidget {
       this.contentPadding,
       this.border,
       this.labelText,
-      this.enabled});
+      this.enabled,
+      this.textCtrl});
 
   @override
   State<StatefulWidget> createState() => _ClearableNumberInputState(value);
@@ -65,7 +67,7 @@ class _ClearableNumberInputState extends State<ClearableNumberInput> {
   @override
   Widget build(BuildContext context) {
     return TextField(
-      controller: _controller,
+      controller: widget.textCtrl ?? _controller,
       keyboardType: TextInputType.numberWithOptions(decimal: true),
       inputFormatters: [DecimalInputFormatter()],
       style: widget.style,

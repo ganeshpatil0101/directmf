@@ -9,6 +9,7 @@ import 'package:sink/redux/selectors.dart';
 import 'package:sink/redux/state.dart';
 import 'package:sink/theme/icons.dart';
 import 'package:sink/ui/common/amount.dart';
+import 'package:sink/ui/mf/addEditMfPage.dart';
 import 'package:sink/ui/mf/mf_item_details.dart';
 
 class MfItem extends StatelessWidget {
@@ -54,7 +55,8 @@ class MfItem extends StatelessWidget {
                       income: (mf.curValue - mf.amtInvstd < 0) ? false : true,
                     ),
                     onTap: () => {
-                          //Navigator.pushNamed(context, EditExpensePage.route, arguments: EditExpensePageArgs(entry),),
+                          Navigator.pushNamed(context, AddEditMfPage.route,
+                              arguments: EditMfPageArgs(mf)),
                         }),
               ),
             ],

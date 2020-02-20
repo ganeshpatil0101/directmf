@@ -8,6 +8,7 @@ import 'package:sink/redux/state.dart';
 import 'package:sink/theme/palette.dart' as Palette;
 import 'package:sink/ui/categories/category_list.dart';
 import 'package:sink/ui/common/dialogs.dart';
+import 'package:sink/ui/mf/addEditMfPage.dart';
 import 'package:sink/ui/mf/addMf.dart';
 import 'package:sink/ui/mf/mfList.dart';
 
@@ -56,7 +57,7 @@ class HomeDrawer extends StatelessWidget {
                     style: Theme.of(context).textTheme.body2,
                   ),
                   onTap: () =>
-                      {Navigator.popAndPushNamed(context, AddMfForm.route)},
+                      {Navigator.popAndPushNamed(context, AddEditMfPage.route)},
                 ),
                 ListTile(
                   title: Text(
