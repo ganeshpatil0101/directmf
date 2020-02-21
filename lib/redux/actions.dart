@@ -85,6 +85,12 @@ class CreateMf {
   CreateMf(this.mf);
 }
 
+@immutable
+class EditMf {
+  final MFData mf;
+  EditMf(this.mf);
+}
+
 /// Sign up & log in
 
 @immutable

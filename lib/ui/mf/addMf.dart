@@ -36,20 +36,34 @@ class AddFmFormState extends State<AddMfForm> {
   var curValController = TextEditingController(),
       mfIdController = TextEditingController(),
       mfNameCtrl = TextEditingController(),
+      unitsCtrl = TextEditingController(),
       navCtrl = TextEditingController();
   var api = new MfApiService();
 
   final MFData data;
   AddFmFormState(this.data) {
-    print('======');
-    print(data.mfId);
     mfIdController.text = data.mfId;
     mfNameCtrl.text = data.name;
     curValController.text = data.curValue.toStringAsFixed(2);
     navCtrl.text = data.nav.toStringAsFixed(3);
     amtInvstd = data.amtInvstd;
-    units = data.units;
+    unitsCtrl.text = data.units.toStringAsFixed(2);
     folioId = data.folioId;
+  }
+
+  @override
+  void initState() {
+    navCtrl.addListener(() => updateCurrentValuation());
+
+    unitsCtrl.addListener(() => updateCurrentValuation());
+    super.initState();
+  }
+
+  void updateCurrentValuation() {
+    if (unitsCtrl.text != "" && navCtrl.text != "") {
+      double curVal = double.parse(unitsCtrl.text) * double.parse(navCtrl.text);
+      curValController.text = curVal.toStringAsFixed(2);
+    }
   }
 
   void handleNameChange(String newName) {
@@ -62,8 +76,14 @@ class AddFmFormState extends State<AddMfForm> {
     Function(String, String, String, double, double, double, double) onSave,
     BuildContext context,
   ) {
-    onSave(mfNameCtrl.text, folioId, mfIdController.text, amtInvstd, units,
-        double.parse(navCtrl.text), double.parse(curValController.text));
+    onSave(
+        mfNameCtrl.text,
+        folioId,
+        mfIdController.text,
+        amtInvstd,
+        double.parse(unitsCtrl.text),
+        double.parse(navCtrl.text),
+        double.parse(curValController.text));
     Navigator.pop(context);
   }
 
@@ -122,6 +142,8 @@ class AddFmFormState extends State<AddMfForm> {
                                 hintText: "Enter 6 Digit ID & Search",
                                 labelText: "MF ID",
                                 border: OutlineInputBorder(),
+                                //enabled:
+                                //    (mfIdController.text != "") ? true : false,
                                 suffixIcon: IconButton(
                                   icon: Icon(Icons.search),
                                   disabledColor: Colors.transparent,
@@ -166,23 +188,18 @@ class AddFmFormState extends State<AddMfForm> {
                             hintText: 'Amount Invested',
                             labelText: 'Amount Invested',
                             style: Theme.of(context).textTheme.body1,
-                            //contentPadding: inputPadding,
                             border: OutlineInputBorder(),
                           ),
                         ),
                         Padding(
                           padding: const EdgeInsets.all(16.0),
                           child: ClearableNumberInput(
-                            onChange: (value) {
-                              setState(() {
-                                this.units = value;
-                              });
-                            },
+                            textCtrl: unitsCtrl,
+                            onChange: (value) {},
                             value: this.units,
                             hintText: 'Total Units',
                             labelText: 'Total Units',
                             style: Theme.of(context).textTheme.body1,
-                            //contentPadding: inputPadding,
                             border: OutlineInputBorder(),
                           ),
                         ),
@@ -190,14 +207,7 @@ class AddFmFormState extends State<AddMfForm> {
                           padding: const EdgeInsets.all(16.0),
                           child: ClearableNumberInput(
                             textCtrl: navCtrl,
-                            onChange: (value) {
-                              setState(() {
-                                this.nav = value;
-                                this.curValue = this.units * this.nav;
-                                curValController.text =
-                                    this.curValue.toStringAsFixed(2);
-                              });
-                            },
+                            onChange: (value) {},
                             value: this.nav,
                             hintText: 'Current Nav Price',
                             labelText: 'Current Nav',
@@ -213,7 +223,7 @@ class AddFmFormState extends State<AddMfForm> {
                             decoration: InputDecoration(
                                 enabled: false, labelText: "Current Valuation"),
                           ),
-                        )
+                        ),
                       ],
                     ),
                   ),

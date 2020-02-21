@@ -85,6 +85,9 @@ class SinkMiddleware extends MiddlewareClass<AppState> {
     } else if (action is CreateMf) {
       final database = getRepository(store.state);
       database.createMf(action.mf);
+    } else if (action is EditMf) {
+      final database = getRepository(store.state);
+      database.createMf(action.mf);
     }
 
     next(action);

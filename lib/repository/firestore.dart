@@ -71,7 +71,7 @@ class FirestoreDatabase {
   }
 
   void createMf(MFData mf) {
-    mfdatacollection.reference().document().setData({
+    mfdatacollection.reference().document(mf.mfId).setData({
       'name': mf.name,
       'folioId': mf.folioId,
       'mfId': mf.mfId,
