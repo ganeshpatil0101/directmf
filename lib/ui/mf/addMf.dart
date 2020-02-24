@@ -38,7 +38,6 @@ class AddFmFormState extends State<AddMfForm> {
       mfNameCtrl = TextEditingController(),
       unitsCtrl = TextEditingController(),
       navCtrl = TextEditingController();
-  var api = new MfApiService();
 
   final MFData data;
   AddFmFormState(this.data) {
@@ -91,7 +90,7 @@ class AddFmFormState extends State<AddMfForm> {
     setState(() {
       this.showLoading = true;
     });
-    var res = await api.getMfDetailsByMfId(mfId);
+    var res = await MfApiService.getMfDetailsByMfId(mfId);
     mfNameCtrl.text = res.name;
     navCtrl.text = res.nav.toStringAsFixed(2);
     setState(() {

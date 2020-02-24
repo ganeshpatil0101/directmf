@@ -79,3 +79,7 @@ String getUserId(AppState state) => state.userId;
 String getUserEmail(AppState state) => state.userEmail;
 
 FirestoreDatabase getRepository(AppState state) => state.database;
+
+DateTime getLastNavSync(AppState state) => state.lastNavSync;
+
+String getAllMfNavTxt(AppState state) => state.allMfNavTxt;

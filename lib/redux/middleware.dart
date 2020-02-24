@@ -11,6 +11,7 @@ import 'package:sink/models/mfData.dart';
 import 'package:sink/redux/actions.dart';
 import 'package:sink/redux/selectors.dart';
 import 'package:sink/redux/state.dart';
+import 'package:sink/services/mf_api_service.dart';
 import 'package:sink/ui/home.dart';
 
 class SinkMiddleware extends MiddlewareClass<AppState> {
@@ -88,6 +89,9 @@ class SinkMiddleware extends MiddlewareClass<AppState> {
     } else if (action is EditMf) {
       final database = getRepository(store.state);
       database.createMf(action.mf);
+    } else if (action is ReloadNavPrice) {
+      final navDataTxt = await MfApiService.getAllMfNavPrice();
+      reloadNavPrice(store, navDataTxt);
     }
 
     next(action);
@@ -131,6 +135,11 @@ class SinkMiddleware extends MiddlewareClass<AppState> {
     Set<MFData> mfDataList = Set();
     event.documents.forEach((ds) => mfDataList.add(MFData.fromSnapshot(ds)));
     store.dispatch(ReloadMfDataList(mfDataList));
+  }
+
+  void reloadNavPrice(Store<AppState> store, String allMfNavPriceTxt) {
+    store.dispatch(ReloadNavPrice(allMfNavPriceTxt));
+    store.dispatch(LastNavSync(DateTime.now()));
   }
 
   void loadMonths(Store<AppState> store, QuerySnapshot event) {

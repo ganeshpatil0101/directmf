@@ -65,6 +65,18 @@ class ReloadMfDataList {
 }
 
 @immutable
+class ReloadNavPrice {
+  final String allMfNavTxt;
+  ReloadNavPrice(this.allMfNavTxt);
+}
+
+@immutable
+class LastNavSync {
+  final DateTime lastNavSync;
+  LastNavSync(this.lastNavSync);
+}
+
+@immutable
 class ReloadColors {
   final Set<Color> usedColors;
 

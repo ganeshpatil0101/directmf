@@ -60,6 +60,13 @@ AppState reduce(AppState state, dynamic action) {
       return state.copyWith(
           mfdatalist: Set.from(action.mfDatalist), areMfLoading: false);
 
+    case ReloadNavPrice:
+      return state.copyWith(
+          allMfNavTxt: action.allMfNavTxt, areMfNavLoading: false);
+
+    case LastNavSync:
+      return state.copyWith(lastNavSync: action.lastNavSync);
+
     case ReloadColors:
       Set<Color> used = Set.from(action.usedColors);
       return state.copyWith(availableColors: materialColors.difference(used));

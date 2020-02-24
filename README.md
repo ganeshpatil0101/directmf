@@ -8,10 +8,24 @@ TODO
 5. Refresh nav button - fetch only once a day  
 6. Graphs
 7. Dashboard - with total investment - Profit - loss for all mf
-8. read sms and update mf units by folio id 
-9. Store fetch nav data to redux store and call api only once a day
-10. Maintain a date that indicates when latest data pulled from api
-11. Upload PDF file with password
-12. Parse json converted from pdf and save to firebase
-13. make mfId field readonly when in edit mode
+8. Store fetch nav data to redux store and call api only once a day
+9. Maintain a date that indicates when latest data pulled from api
+10. 
+11. 
+12. 
+13. 
 
+
+Create MF By CAMs CDSL/NSDL Statement
+1. Upload PDF file with password
+2. Parse json converted from pdf and save to firebase
+
+Read SMS
+1. Read sms and update mf units by folio id 
+2. 
+
+UI Improvements
+1. Remove Black screen with loading icon while fetching NAV price
+2. make mfId field readonly when in edit mode
+3. Change Login Screen UI Colour
+3. MF detail screen before edit screen
