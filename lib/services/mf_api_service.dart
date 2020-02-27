@@ -1,14 +1,26 @@
 import 'dart:async';
 import 'package:http/http.dart' as http;
+import 'package:sink/common/calendar.dart';
 import 'package:sink/models/mfData.dart';
 import 'package:sink/models/parsedMf.dart';
+import 'package:sink/main.dart';
+import 'package:sink/redux/actions.dart';
+import 'package:sink/redux/selectors.dart';
 
 const NAV_PRICE_OPEN_API = 'https://www.amfiindia.com/spages/NAVAll.txt';
 
 class MfApiService {
   static Future<ParsedMf> getMfDetailsByMfId(mfId) async {
-    final res = await http.get(NAV_PRICE_OPEN_API);
-    return MfApiService._parseToMfData(res.body, mfId);
+    DateTime lastSync = getLastNavSync(globalStore.state);
+    if (isLastSynchPrev(lastSync)) {
+      String allMfNavTxt = getAllMfNavTxt(globalStore.state);
+      return MfApiService._parseToMfData(allMfNavTxt, mfId);
+    } else {
+      final res = await http.get(NAV_PRICE_OPEN_API);
+      globalStore.dispatch(ReloadNavPrice(res.body));
+      globalStore.dispatch(LastNavSync(DateTime.now()));
+      return MfApiService._parseToMfData(res.body, mfId);
+    }
   }
 
   static Future<String> getAllMfNavPrice() async {
@@ -28,7 +40,7 @@ class MfApiService {
         nav: double.parse(parsedData[4]),
       );
     }
-    return false;
+    return throw "MF Id Not Found " + mfId;
   }
 
   static getLine(List arrData, String mfId) {

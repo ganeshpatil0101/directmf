@@ -71,7 +71,7 @@ class AppState {
         this.viewableMonths = viewableMonths ??
             DoubleLinkedQueue.from([firstDay(DateTime.now())]),
         this.database = database,
-        this.lastNavSync = lastNavSync ?? "";
+        this.lastNavSync = lastNavSync ?? null;
 
   AppState copyWith(
       {String userId,

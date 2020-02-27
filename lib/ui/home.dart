@@ -82,14 +82,12 @@ class HomePageState extends State<HomePage>
                       onPressed: Navigator.of(context).pop,
                     ),
                     popup.button(
-                      label: 'Manually',
-                      onPressed: () =>
-                          Navigator.pushNamed(context, AddEditMfPage.route),
-                      // Navigator.pushNamed(context, AddMfFormPage.route)),
-                    )
+                        label: 'Manually',
+                        onPressed: () {
+                          Navigator.of(context).pop();
+                          Navigator.pushNamed(context, AddEditMfPage.route);
+                        })
                   ],
-                  // bool barrierDismissible = false,
-                  // Widget close,
                 )
               }),
       bottomNavigationBar: BottomAppBar(

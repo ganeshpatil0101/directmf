@@ -32,3 +32,14 @@ List<DateTime> dateRange(DateTime from, DateTime to) {
   }
   return result;
 }
+
+bool isLastSynchPrev(DateTime lastSync) {
+  DateTime today = DateTime.now();
+  if (lastSync != null) {
+    if (lastSync.day <= today.day && lastSync.month <= today.month) {
+      return true;
+    }
+    return false;
+  }
+  return false;
+}

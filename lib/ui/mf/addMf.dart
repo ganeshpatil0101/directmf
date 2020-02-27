@@ -90,11 +90,18 @@ class AddFmFormState extends State<AddMfForm> {
     setState(() {
       this.showLoading = true;
     });
-    var res = await MfApiService.getMfDetailsByMfId(mfId);
-    mfNameCtrl.text = res.name;
-    navCtrl.text = res.nav.toStringAsFixed(2);
-    setState(() {
-      this.showLoading = false;
+    var res = MfApiService.getMfDetailsByMfId(mfId);
+    res.then((res) {
+      mfNameCtrl.text = res.name;
+      navCtrl.text = res.nav.toStringAsFixed(2);
+      setState(() {
+        this.showLoading = false;
+      });
+    }).catchError((err) {
+      print('====> $err');
+      setState(() {
+        this.showLoading = false;
+      });
     });
   }
 

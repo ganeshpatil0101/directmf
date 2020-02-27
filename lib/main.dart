@@ -18,17 +18,19 @@ import 'package:sink/ui/mf/addEditMfPage.dart';
 import 'package:sink/ui/mf/addMf.dart';
 import 'package:sink/ui/mf/mfList.dart';
 
+Store globalStore;
+
 void main() {
   final navigatorKey = GlobalKey<NavigatorState>();
-  final Store store = Store<AppState>(
+  globalStore = Store<AppState>(
     reduce,
     distinct: true,
     initialState: AppState(areCategoriesLoading: true),
     middleware: [SinkMiddleware(navigatorKey)],
   );
-  store.dispatch(RetrieveUser());
+  globalStore.dispatch(RetrieveUser());
 
-  runApp(Sink(navigatorKey, store));
+  runApp(Sink(navigatorKey, globalStore));
 }
 
 class Sink extends StatelessWidget {

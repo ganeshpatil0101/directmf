@@ -10,7 +10,7 @@ TODO
 7. Dashboard - with total investment - Profit - loss for all mf
 8. Store fetch nav data to redux store and call api only once a day
 9. Maintain a date that indicates when latest data pulled from api
-10. 
+10. Show Error popup when MfId Not Found
 11. 
 12. 
 13. 
