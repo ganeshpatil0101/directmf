@@ -6,6 +6,7 @@ import 'package:sink/ui/entries/entries_page.dart';
 import 'package:sink/ui/mf/addEditMfPage.dart';
 import 'package:sink/ui/mf/addMf.dart';
 import 'package:sink/ui/mf/entity_mf_list.dart';
+import 'package:sink/ui/mf/upload_pdf.dart';
 import 'package:sink/ui/statistics/statistics_page.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -79,7 +80,10 @@ class HomePageState extends State<HomePage>
                   actions: [
                     popup.button(
                       label: 'Upload',
-                      onPressed: Navigator.of(context).pop,
+                      onPressed: () {
+                        Navigator.of(context).pop();
+                        Navigator.pushNamed(context, UploadPdf.route);
+                      },
                     ),
                     popup.button(
                         label: 'Manually',

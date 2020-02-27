@@ -17,6 +17,7 @@ import 'package:sink/ui/home.dart';
 import 'package:sink/ui/mf/addEditMfPage.dart';
 import 'package:sink/ui/mf/addMf.dart';
 import 'package:sink/ui/mf/mfList.dart';
+import 'package:sink/ui/mf/upload_pdf.dart';
 
 Store globalStore;
 
@@ -57,6 +58,7 @@ class Sink extends StatelessWidget {
           AddExpensePage.route: (context) => AddExpensePage(),
           AddEditMfPage.route: (context) => AddEditMfPage(),
           EditExpensePage.route: (context) => EditExpensePage(),
+          UploadPdf.route: (context) => UploadPdf()
         },
         initialRoute: InitialPage.route,
       ),
