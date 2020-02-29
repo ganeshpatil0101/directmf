@@ -18,7 +18,7 @@ class RoundedButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.fromLTRB(24.0, 8.0, 24.0, 8.0),
+      padding: const EdgeInsets.fromLTRB(16.0, 2.0, 16.0, 2.0),
       child: FlatButton(
         shape: RoundedRectangleBorder(borderRadius: radius),
         child: Text(text,

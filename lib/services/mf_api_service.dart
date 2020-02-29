@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:io';
 import 'package:http/http.dart' as http;
 import 'package:sink/common/calendar.dart';
 import 'package:sink/models/mfData.dart';
@@ -8,6 +9,8 @@ import 'package:sink/redux/actions.dart';
 import 'package:sink/redux/selectors.dart';
 
 const NAV_PRICE_OPEN_API = 'https://www.amfiindia.com/spages/NAVAll.txt';
+const UPLOAD_PDF_SERVER =
+    'http://ec2-13-233-17-92.ap-south-1.compute.amazonaws.com:8000/upload';
 
 class MfApiService {
   static Future<ParsedMf> getMfDetailsByMfId(mfId) async {
@@ -26,6 +29,21 @@ class MfApiService {
   static Future<String> getAllMfNavPrice() async {
     final res = await http.get(NAV_PRICE_OPEN_API);
     return res.body.toString();
+  }
+
+  static Future<String> upload_Pdf(filePath, filePass) async {
+    try {
+      var uri = Uri.parse(UPLOAD_PDF_SERVER);
+      var request = new http.MultipartRequest("post", uri);
+      request.fields['pass'] = filePass;
+      request.files
+          .add(await http.MultipartFile.fromPath('sampleFile', filePath));
+      print(request);
+      var response = await request.send();
+      return response.stream.bytesToString();
+    } catch (e) {
+      throw e;
+    }
   }
 
   static _parseToMfData(String res, String mfId) {
