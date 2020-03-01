@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
 import 'package:sink/models/mfData.dart';
@@ -8,12 +9,7 @@ import 'package:redux/redux.dart';
 import 'package:sink/redux/selectors.dart';
 import 'package:sink/repository/firestore.dart';
 import 'package:sink/ui/common/progress_indicator.dart';
-import 'package:sink/ui/entries/day_entries.dart';
-import 'package:sink/ui/mf/mfList.dart';
 import 'package:sink/ui/mf/mf_item.dart';
-import 'package:sink/ui/statistics/balance.dart';
-
-import 'package:sink/theme/palette.dart' as Palette;
 
 class EntityMfList extends StatelessWidget {
   @override
@@ -41,6 +37,7 @@ class EntityMfList extends StatelessWidget {
                 shrinkWrap: true,
                 padding: EdgeInsets.all(8.0),
                 children: chw, //TODO
+                dragStartBehavior: DragStartBehavior.start,
               ),
             );
           },

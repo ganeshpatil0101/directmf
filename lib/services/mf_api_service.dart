@@ -38,7 +38,6 @@ class MfApiService {
       request.fields['pass'] = filePass;
       request.files
           .add(await http.MultipartFile.fromPath('sampleFile', filePath));
-      print(request);
       var response = await request.send();
       return response.stream.bytesToString();
     } catch (e) {

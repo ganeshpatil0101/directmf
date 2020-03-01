@@ -61,12 +61,12 @@ class HomePageState extends State<HomePage>
         children: <Widget>[
           //EntriesPage(),
           EntityMfList(),
-          StatisticsPage(),
+          StatisticsPage()
         ],
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       floatingActionButton: FloatingActionButton(
-          tooltip: 'Add an expense',
+          tooltip: 'Upload',
           isExtended: true,
           backgroundColor: Colors.white,
           foregroundColor: Colors.black,
@@ -103,7 +103,7 @@ class HomePageState extends State<HomePage>
           child: TabBar(
             tabs: <Widget>[
               Tab(icon: Icon(Icons.receipt)),
-              Tab(icon: Icon(Icons.insert_chart)),
+              Tab(icon: Icon(Icons.insert_chart))
             ],
             controller: _tabController,
             labelColor: Colors.indigo,

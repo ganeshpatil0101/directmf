@@ -17,7 +17,7 @@ TODO
 
 
 Create MF By CAMs CDSL/NSDL Statement
-1. Upload PDF file with password
+1. Upload PDF file with password - DOne
 2. Parse json converted from pdf and save to firebase
 
 Read SMS
