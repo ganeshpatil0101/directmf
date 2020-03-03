@@ -89,6 +89,12 @@ class SinkMiddleware extends MiddlewareClass<AppState> {
     } else if (action is EditMf) {
       final database = getRepository(store.state);
       database.createMf(action.mf);
+    } else if (action is LastNavSync) {
+      final database = getRepository(store.state);
+      database.updateLastNavSync(action.lastNavSync).then((res) {
+        print("res ---- >  ");
+        store.dispatch(SetLastNavSync(action.lastNavSync));
+      }).catchError((e) => print(e));
     }
     /*else if (action is ReloadNavPrice) {
       final navDataTxt = await MfApiService.getAllMfNavPrice();

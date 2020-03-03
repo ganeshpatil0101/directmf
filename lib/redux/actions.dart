@@ -77,6 +77,12 @@ class LastNavSync {
 }
 
 @immutable
+class SetLastNavSync {
+  final DateTime lastNavSync;
+  SetLastNavSync(this.lastNavSync);
+}
+
+@immutable
 class ReloadColors {
   final Set<Color> usedColors;
 

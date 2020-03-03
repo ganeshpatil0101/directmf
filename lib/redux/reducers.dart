@@ -59,7 +59,8 @@ AppState reduce(AppState state, dynamic action) {
     case ReloadMfDataList:
       return state.copyWith(
           mfdatalist: Set.from(action.mfDatalist), areMfLoading: false);
-
+    case SetLastNavSync:
+      return state.copyWith(lastNavSync: action.lastNavSync);
     case ReloadNavPrice:
       return state.copyWith(
           allMfNavTxt: action.allMfNavTxt, areMfNavLoading: false);

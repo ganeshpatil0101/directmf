@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_beautiful_popup/main.dart';
+import 'package:sink/common/calendar.dart';
+import 'package:sink/main.dart';
+import 'package:sink/redux/actions.dart';
+import 'package:sink/redux/selectors.dart';
 import 'package:sink/ui/drawer.dart';
 import 'package:sink/ui/entries/add_entry_page.dart';
 import 'package:sink/ui/entries/entries_page.dart';
@@ -27,7 +31,7 @@ class HomePageState extends State<HomePage>
     with SingleTickerProviderStateMixin {
   var _scaffoldKey = GlobalKey<ScaffoldState>();
   TabController _tabController;
-
+  bool enableRefresh = true;
   @override
   void initState() {
     super.initState();
@@ -55,6 +59,28 @@ class HomePageState extends State<HomePage>
         backgroundColor: Theme.of(context).backgroundColor,
         centerTitle: true,
         title: Text('Smart Direct MF'),
+        actions: <Widget>[
+          IconButton(
+              disabledColor: Colors.grey,
+              iconSize: 28.0,
+              icon: Icon(Icons.refresh),
+              onPressed: () {
+                print("reload MF");
+                // Get previous last nav sync date and compaire with current
+                // if not matched then update the lastNavSynch in DB
+                // the dispatch refresh all nav price request
+                // if lastlastnav date and todays date same then nothing will happen
+                DateTime lastSync = getLastNavSync(globalStore.state);
+                if (isLastSynchPrev(lastSync)) {
+                  print(" Nav price is updated no need to update again");
+                } else {
+                  print("Old Nav Price Need to Update with current Nav");
+                  globalStore.dispatch(LastNavSync(DateTime.now()));
+                  DateTime afterDate = getLastNavSync(globalStore.state);
+                  print(" after date $afterDate ");
+                }
+              })
+        ],
       ),
       body: TabBarView(
         controller: _tabController,

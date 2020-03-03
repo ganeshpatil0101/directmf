@@ -3,6 +3,8 @@ import 'package:sink/models/category.dart';
 import 'package:sink/models/entry.dart';
 import 'package:sink/models/mfData.dart';
 
+const String LAST_NAV_SYNC = "lastNavSync";
+
 class FirestoreDatabase {
   static Firestore _db = Firestore.instance;
 
@@ -10,12 +12,14 @@ class FirestoreDatabase {
   final CollectionReference entries;
   final CollectionReference categories;
   final CollectionReference mfdatacollection;
+  final CollectionReference lastNavCol;
 
   FirestoreDatabase._()
       // For testing only
       : this.userId = '',
         this.entries = null,
         this.categories = null,
+        this.lastNavCol = null,
         this.mfdatacollection = null;
 
   FirestoreDatabase(this.userId)
@@ -23,6 +27,8 @@ class FirestoreDatabase {
             _db.collection("users").document(userId).collection("entry"),
         this.categories =
             _db.collection("users").document(userId).collection("category"),
+        this.lastNavCol =
+            _db.collection("users").document(userId).collection(LAST_NAV_SYNC),
         this.mfdatacollection =
             _db.collection("users").document(userId).collection("mfData");
 
@@ -80,6 +86,13 @@ class FirestoreDatabase {
       'nav': mf.nav,
       'curValue': mf.curValue
     });
+  }
+
+  Future<void> updateLastNavSync(DateTime today) {
+    return lastNavCol
+        .reference()
+        .document(LAST_NAV_SYNC)
+        .setData({'date': today});
   }
 }
 
