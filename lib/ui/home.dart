@@ -4,6 +4,7 @@ import 'package:sink/common/calendar.dart';
 import 'package:sink/main.dart';
 import 'package:sink/redux/actions.dart';
 import 'package:sink/redux/selectors.dart';
+import 'package:sink/services/mf_api_service.dart';
 import 'package:sink/ui/drawer.dart';
 import 'package:sink/ui/entries/add_entry_page.dart';
 import 'package:sink/ui/entries/entries_page.dart';
@@ -76,8 +77,11 @@ class HomePageState extends State<HomePage>
                 } else {
                   print("Old Nav Price Need to Update with current Nav");
                   globalStore.dispatch(LastNavSync(DateTime.now()));
-                  DateTime afterDate = getLastNavSync(globalStore.state);
-                  print(" after date $afterDate ");
+                  MfApiService.updateAllMfNavPrice().then((res) {
+                    print("=====> Updated All Nav Price Successfully ...");
+                  }).catchError((e) {
+                    print(e);
+                  });
                 }
               })
         ],

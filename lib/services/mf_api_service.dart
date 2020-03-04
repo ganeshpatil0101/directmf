@@ -14,15 +14,45 @@ const UPLOAD_PDF_SERVER =
 
 class MfApiService {
   static Future<ParsedMf> getMfDetailsByMfId(mfId) async {
+    return MfApiService.getUpdatedNavPrice().then((allMfNavTxt) {
+      return MfApiService._parseToMfData(allMfNavTxt, mfId);
+    });
+  }
+
+  static Future<String> getUpdatedNavPrice() async {
+    String allMfNavTxt = "";
     DateTime lastSync = getLastNavSync(globalStore.state);
     if (isLastSynchPrev(lastSync)) {
-      String allMfNavTxt = getAllMfNavTxt(globalStore.state);
-      return MfApiService._parseToMfData(allMfNavTxt, mfId);
+      allMfNavTxt = getAllMfNavTxt(globalStore.state);
     } else {
       final res = await http.get(NAV_PRICE_OPEN_API);
       globalStore.dispatch(ReloadNavPrice(res.body));
       globalStore.dispatch(LastNavSync(DateTime.now()));
-      return MfApiService._parseToMfData(res.body, mfId);
+      allMfNavTxt = res.body.toString();
+    }
+    return allMfNavTxt;
+  }
+
+  static Future<String> updateAllMfNavPrice() async {
+    try {
+      String allMfNavTxt = await MfApiService.getUpdatedNavPrice();
+      getMfDataList(globalStore.state).toList().forEach((MFData c) {
+        print("======> id ${c.mfId}");
+        ParsedMf data = MfApiService._parseToMfData(allMfNavTxt, c.mfId);
+        double curVal = c.units * data.nav;
+        globalStore.dispatch(CreateMf(
+          MFData(
+              name: c.name,
+              folioId: c.folioId,
+              mfId: c.mfId,
+              amtInvstd: c.amtInvstd,
+              units: c.units,
+              nav: data.nav,
+              curValue: curVal),
+        ));
+      });
+    } catch (e) {
+      print(e);
     }
   }
 
@@ -63,7 +93,7 @@ class MfApiService {
   static getLine(List arrData, String mfId) {
     var d = [];
     var count = 0;
-    // TODO improve login by removing for and use regex to get line number remove count
+    // TODO improve logic by removing for and use regex to get line number remove count
     for (final dt in arrData) {
       var indx = dt.indexOf(mfId);
       if (indx > -1) {
