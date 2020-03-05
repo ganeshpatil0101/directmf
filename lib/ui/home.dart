@@ -5,6 +5,7 @@ import 'package:sink/main.dart';
 import 'package:sink/redux/actions.dart';
 import 'package:sink/redux/selectors.dart';
 import 'package:sink/services/mf_api_service.dart';
+import 'package:sink/ui/common/progress_indicator.dart';
 import 'package:sink/ui/drawer.dart';
 import 'package:sink/ui/entries/add_entry_page.dart';
 import 'package:sink/ui/entries/entries_page.dart';
@@ -33,6 +34,7 @@ class HomePageState extends State<HomePage>
   var _scaffoldKey = GlobalKey<ScaffoldState>();
   TabController _tabController;
   bool enableRefresh = true;
+  bool showLoading = false;
   @override
   void initState() {
     super.initState();
@@ -52,6 +54,10 @@ class HomePageState extends State<HomePage>
       context: context,
       template: TemplateBlueRocket,
     );
+    var infoMsg =
+        BeautifulPopup(context: context, template: TemplateNotification);
+    var successMsg =
+        BeautifulPopup(context: context, template: TemplateSuccess);
     return Scaffold(
       drawer: HomeDrawer(),
       extendBody: true,
@@ -74,11 +80,39 @@ class HomePageState extends State<HomePage>
                 DateTime lastSync = getLastNavSync(globalStore.state);
                 if (isLastSynchPrev(lastSync)) {
                   print(" Nav price is updated no need to update again");
+                  infoMsg.show(
+                      title: "Info",
+                      content: "Nav price is updated for today",
+                      actions: [
+                        infoMsg.button(
+                          label: 'OK',
+                          onPressed: () {
+                            Navigator.of(context).pop();
+                          },
+                        )
+                      ]);
                 } else {
                   print("Old Nav Price Need to Update with current Nav");
+                  setState(() {
+                    this.showLoading = true;
+                  });
                   globalStore.dispatch(LastNavSync(DateTime.now()));
                   MfApiService.updateAllMfNavPrice().then((res) {
                     print("=====> Updated All Nav Price Successfully ...");
+                    setState(() {
+                      this.showLoading = false;
+                    });
+                    successMsg.show(
+                        title: "Done!",
+                        content:
+                            "All Mutual Fund's Nav Price Updated Successfully",
+                        actions: [
+                          successMsg.button(
+                              label: 'OK',
+                              onPressed: () {
+                                Navigator.of(context).pop();
+                              })
+                        ]);
                   }).catchError((e) {
                     print(e);
                   });
@@ -90,7 +124,7 @@ class HomePageState extends State<HomePage>
         controller: _tabController,
         children: <Widget>[
           //EntriesPage(),
-          EntityMfList(),
+          (showLoading) ? PaddedCircularProgressIndicator() : EntityMfList(),
           StatisticsPage()
         ],
       ),
