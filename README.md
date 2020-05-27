@@ -5,13 +5,13 @@ TODO
 2. MF list with formatting with gain loss per mf - Temporary Done - Need to inprove UI
 3. Edit Specific MF - Done 
 4. Fetch current nav price using open api - Done
-5. Refresh nav button - fetch only once a day  
+5. Refresh nav button - fetch only once a day - Done
 6. Graphs
-7. Dashboard - with total investment - Profit - loss for all mf
-8. Store fetch nav data to redux store and call api only once a day
-9. Maintain a date that indicates when latest data pulled from api
+7. Dashboard - with total investment - Profit - loss for all mf - Done
+8. Store fetch nav data to redux store and call api only once a day - Done
+9. Maintain a date that indicates when latest data pulled from api - Done
 10. Show Error popup when MfId Not Found
-11. 
+11. Persist login, when minimizing app should not ask for login again
 12. 
 13. 
 

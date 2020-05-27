@@ -2,18 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
 import 'package:quiver/strings.dart';
 import 'package:redux/redux.dart';
-import 'package:sink/models/category.dart';
-import 'package:sink/models/mfData.dart';
-import 'package:sink/redux/actions.dart';
-import 'package:sink/redux/selectors.dart';
-import 'package:sink/redux/state.dart';
-import 'package:sink/services/mf_api_service.dart';
-import 'package:sink/ui/common/number_input.dart';
-import 'package:sink/ui/common/progress_indicator.dart';
-import 'package:sink/ui/common/text_input.dart';
-import 'package:sink/ui/forms/color_grid.dart';
-import 'package:uuid/uuid.dart';
-
+import 'package:DirectMF/models/mfData.dart';
+import 'package:DirectMF/redux/actions.dart';
+import 'package:DirectMF/redux/state.dart';
+import 'package:DirectMF/services/mf_api_service.dart';
+import 'package:DirectMF/ui/common/number_input.dart';
+import 'package:DirectMF/ui/common/progress_indicator.dart';
+import 'package:DirectMF/ui/common/text_input.dart';
 // class CategoryFormArgs {
 //   final CategoryType type;
 
@@ -61,6 +56,7 @@ class AddFmFormState extends State<AddMfForm> {
   void updateCurrentValuation() {
     if (unitsCtrl.text != "" && navCtrl.text != "") {
       double curVal = double.parse(unitsCtrl.text) * double.parse(navCtrl.text);
+      curVal = curVal - this.amtInvstd;
       curValController.text = curVal.toStringAsFixed(2);
     }
   }

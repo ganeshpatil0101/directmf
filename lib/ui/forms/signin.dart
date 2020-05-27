@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
 import 'package:redux/redux.dart';
-import 'package:sink/redux/actions.dart';
-import 'package:sink/redux/selectors.dart';
-import 'package:sink/redux/state.dart';
-import 'package:sink/ui/common/buttons.dart';
-import 'package:sink/ui/common/form_errors.dart';
-import 'package:sink/ui/common/text_input.dart';
+import 'package:DirectMF/redux/actions.dart';
+import 'package:DirectMF/redux/selectors.dart';
+import 'package:DirectMF/redux/state.dart';
+import 'package:DirectMF/ui/common/buttons.dart';
+import 'package:DirectMF/ui/common/form_errors.dart';
+import 'package:DirectMF/ui/common/text_input.dart';
 
 class SignInForm extends StatefulWidget {
   @override

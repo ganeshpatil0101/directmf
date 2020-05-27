@@ -1,5 +1,5 @@
 import 'package:flutter/services.dart';
-import 'package:sink/common/input_formatter.dart';
+import 'package:DirectMF/common/input_formatter.dart';
 import 'package:test/test.dart';
 
 main() {

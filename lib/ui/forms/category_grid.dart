@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
 import 'package:redux/redux.dart';
-import 'package:sink/models/category.dart';
-import 'package:sink/redux/selectors.dart';
-import 'package:sink/redux/state.dart';
-import 'package:sink/theme/icons.dart';
-import 'package:sink/theme/palette.dart' as Palette;
-import 'package:sink/ui/categories/category.dart';
-import 'package:sink/ui/forms/category_form.dart';
+import 'package:DirectMF/models/category.dart';
+import 'package:DirectMF/redux/selectors.dart';
+import 'package:DirectMF/redux/state.dart';
+import 'package:DirectMF/theme/icons.dart';
+import 'package:DirectMF/theme/palette.dart' as Palette;
+import 'package:DirectMF/ui/categories/category.dart';
+import 'package:DirectMF/ui/forms/category_form.dart';
 
 class CategoryGrid extends StatelessWidget {
   static const ADD_CATEGORY_ID = "Add";

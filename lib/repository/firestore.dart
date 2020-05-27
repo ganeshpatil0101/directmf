@@ -1,7 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:sink/models/category.dart';
-import 'package:sink/models/entry.dart';
-import 'package:sink/models/mfData.dart';
+import 'package:DirectMF/models/category.dart';
+import 'package:DirectMF/models/entry.dart';
+import 'package:DirectMF/models/mfData.dart';
 
 const String LAST_NAV_SYNC = "lastNavSync";
 

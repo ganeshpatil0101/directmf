@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:sink/theme/palette.dart' as Palette;
+import 'package:DirectMF/theme/palette.dart' as Palette;
 
 class ConfirmationDialog extends StatelessWidget {
   final String title;

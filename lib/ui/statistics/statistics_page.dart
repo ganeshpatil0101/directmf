@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:sink/ui/statistics/month_summary.dart';
-import 'package:sink/ui/statistics/year_summary.dart';
+import 'package:DirectMF/ui/statistics/month_summary.dart';
+import 'package:DirectMF/ui/statistics/year_summary.dart';
 
 class StatisticsPage extends StatelessWidget {
   @override

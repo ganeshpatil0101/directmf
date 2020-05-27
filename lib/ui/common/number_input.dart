@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:quiver/strings.dart';
-import 'package:sink/common/input_formatter.dart';
+import 'package:DirectMF/common/input_formatter.dart';
 
 class ClearableNumberInput extends StatefulWidget {
   final Function(double) onChange;

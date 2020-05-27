@@ -1,19 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_beautiful_popup/main.dart';
-import 'package:sink/common/calendar.dart';
-import 'package:sink/main.dart';
-import 'package:sink/redux/actions.dart';
-import 'package:sink/redux/selectors.dart';
-import 'package:sink/services/mf_api_service.dart';
-import 'package:sink/ui/common/progress_indicator.dart';
-import 'package:sink/ui/drawer.dart';
-import 'package:sink/ui/entries/add_entry_page.dart';
-import 'package:sink/ui/entries/entries_page.dart';
-import 'package:sink/ui/mf/addEditMfPage.dart';
-import 'package:sink/ui/mf/addMf.dart';
-import 'package:sink/ui/mf/entity_mf_list.dart';
-import 'package:sink/ui/mf/upload_pdf.dart';
-import 'package:sink/ui/statistics/statistics_page.dart';
+import 'package:DirectMF/common/calendar.dart';
+import 'package:DirectMF/main.dart';
+import 'package:DirectMF/redux/actions.dart';
+import 'package:DirectMF/redux/selectors.dart';
+import 'package:DirectMF/services/mf_api_service.dart';
+import 'package:DirectMF/ui/common/progress_indicator.dart';
+import 'package:DirectMF/ui/drawer.dart';
+import 'package:DirectMF/ui/entries/add_entry_page.dart';
+import 'package:DirectMF/ui/entries/entries_page.dart';
+import 'package:DirectMF/ui/mf/addEditMfPage.dart';
+import 'package:DirectMF/ui/mf/addMf.dart';
+import 'package:DirectMF/ui/mf/entity_mf_list.dart';
+import 'package:DirectMF/ui/mf/upload_pdf.dart';
+import 'package:DirectMF/ui/statistics/statistics_page.dart';
 
 class HomeScreen extends StatelessWidget {
   static const route = '/home';
@@ -96,7 +96,7 @@ class HomePageState extends State<HomePage>
                   setState(() {
                     this.showLoading = true;
                   });
-                  globalStore.dispatch(LastNavSync(DateTime.now()));
+                  //globalStore.dispatch(LastNavSync(DateTime.now()));
                   MfApiService.updateAllMfNavPrice().then((res) {
                     print("=====> Updated All Nav Price Successfully ...");
                     setState(() {

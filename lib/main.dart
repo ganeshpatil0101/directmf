@@ -1,23 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
 import 'package:redux/redux.dart';
-import 'package:sink/redux/actions.dart';
-import 'package:sink/redux/middleware.dart';
-import 'package:sink/redux/reducers.dart';
-import 'package:sink/redux/state.dart';
-import 'package:sink/theme/theme.dart';
-import 'package:sink/ui/categories/category_list.dart';
-import 'package:sink/ui/common/buttons.dart';
-import 'package:sink/ui/entries/add_entry_page.dart';
-import 'package:sink/ui/entries/edit_entry_page.dart';
-import 'package:sink/ui/forms/category_form.dart';
-import 'package:sink/ui/forms/registration.dart';
-import 'package:sink/ui/forms/signin.dart';
-import 'package:sink/ui/home.dart';
-import 'package:sink/ui/mf/addEditMfPage.dart';
-import 'package:sink/ui/mf/addMf.dart';
-import 'package:sink/ui/mf/mfList.dart';
-import 'package:sink/ui/mf/upload_pdf.dart';
+import 'package:DirectMF/redux/actions.dart';
+import 'package:DirectMF/redux/middleware.dart';
+import 'package:DirectMF/redux/reducers.dart';
+import 'package:DirectMF/redux/state.dart';
+import 'package:DirectMF/theme/theme.dart';
+import 'package:DirectMF/ui/categories/category_list.dart';
+import 'package:DirectMF/ui/common/buttons.dart';
+import 'package:DirectMF/ui/entries/add_entry_page.dart';
+import 'package:DirectMF/ui/entries/edit_entry_page.dart';
+import 'package:DirectMF/ui/forms/category_form.dart';
+import 'package:DirectMF/ui/forms/registration.dart';
+import 'package:DirectMF/ui/forms/signin.dart';
+import 'package:DirectMF/ui/home.dart';
+import 'package:DirectMF/ui/mf/addEditMfPage.dart';
+import 'package:DirectMF/ui/mf/addMf.dart';
+import 'package:DirectMF/ui/mf/mfList.dart';
+import 'package:DirectMF/ui/mf/upload_pdf.dart';
 
 Store globalStore;
 
@@ -27,25 +27,25 @@ void main() {
     reduce,
     distinct: true,
     initialState: AppState(areCategoriesLoading: true),
-    middleware: [SinkMiddleware(navigatorKey)],
+    middleware: [DirectMFMiddleware(navigatorKey)],
   );
   globalStore.dispatch(RetrieveUser());
 
-  runApp(Sink(navigatorKey, globalStore));
+  runApp(DirectMF(navigatorKey, globalStore));
 }
 
-class Sink extends StatelessWidget {
+class DirectMF extends StatelessWidget {
   final GlobalKey<NavigatorState> navigatorKey;
   final Store<AppState> store;
 
-  Sink(this.navigatorKey, this.store);
+  DirectMF(this.navigatorKey, this.store);
 
   @override
   Widget build(BuildContext context) {
     return StoreProvider<AppState>(
       store: store,
       child: MaterialApp(
-        title: 'Sink',
+        title: 'DirectMF',
         theme: appTheme,
         navigatorKey: navigatorKey,
         routes: {

@@ -1,4 +1,4 @@
-import 'package:sink/models/entry.dart';
+import 'package:DirectMF/models/entry.dart';
 import 'package:test/test.dart';
 
 void main() {

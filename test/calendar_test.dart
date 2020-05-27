@@ -1,6 +1,6 @@
 import 'package:intl/intl.dart';
-import 'package:sink/common/calendar.dart';
-import 'package:sink/common/exceptions.dart';
+import 'package:DirectMF/common/calendar.dart';
+import 'package:DirectMF/common/exceptions.dart';
 import 'package:test/test.dart';
 
 void main() {

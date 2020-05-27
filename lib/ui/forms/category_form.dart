@@ -2,12 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
 import 'package:quiver/strings.dart';
 import 'package:redux/redux.dart';
-import 'package:sink/models/category.dart';
-import 'package:sink/redux/actions.dart';
-import 'package:sink/redux/selectors.dart';
-import 'package:sink/redux/state.dart';
-import 'package:sink/ui/common/text_input.dart';
-import 'package:sink/ui/forms/color_grid.dart';
+import 'package:DirectMF/models/category.dart';
+import 'package:DirectMF/redux/actions.dart';
+import 'package:DirectMF/redux/selectors.dart';
+import 'package:DirectMF/redux/state.dart';
+import 'package:DirectMF/ui/common/text_input.dart';
+import 'package:DirectMF/ui/forms/color_grid.dart';
 import 'package:uuid/uuid.dart';
 
 import 'icon_grid.dart';

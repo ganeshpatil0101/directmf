@@ -2,15 +2,15 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
 import 'package:redux/redux.dart';
-import 'package:sink/redux/actions.dart';
-import 'package:sink/redux/selectors.dart';
-import 'package:sink/redux/state.dart';
-import 'package:sink/theme/palette.dart' as Palette;
-import 'package:sink/ui/categories/category_list.dart';
-import 'package:sink/ui/common/dialogs.dart';
-import 'package:sink/ui/mf/addEditMfPage.dart';
-import 'package:sink/ui/mf/addMf.dart';
-import 'package:sink/ui/mf/mfList.dart';
+import 'package:DirectMF/redux/actions.dart';
+import 'package:DirectMF/redux/selectors.dart';
+import 'package:DirectMF/redux/state.dart';
+import 'package:DirectMF/theme/palette.dart' as Palette;
+import 'package:DirectMF/ui/categories/category_list.dart';
+import 'package:DirectMF/ui/common/dialogs.dart';
+import 'package:DirectMF/ui/mf/addEditMfPage.dart';
+import 'package:DirectMF/ui/mf/addMf.dart';
+import 'package:DirectMF/ui/mf/mfList.dart';
 
 class HomeDrawer extends StatelessWidget {
   @override
@@ -35,13 +35,6 @@ class HomeDrawer extends StatelessWidget {
                       color: Theme.of(context).backgroundColor,
                     ),
                   ),
-                ),
-                ListTile(
-                  title: Text(
-                    'Mf List',
-                    style: Theme.of(context).textTheme.body2,
-                  ),
-                  onTap: () => Navigator.popAndPushNamed(context, MfList.route),
                 ),
                 ListTile(
                   title: Text(

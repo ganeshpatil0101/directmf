@@ -1,12 +1,12 @@
 import 'dart:async';
 import 'dart:io';
 import 'package:http/http.dart' as http;
-import 'package:sink/common/calendar.dart';
-import 'package:sink/models/mfData.dart';
-import 'package:sink/models/parsedMf.dart';
-import 'package:sink/main.dart';
-import 'package:sink/redux/actions.dart';
-import 'package:sink/redux/selectors.dart';
+import 'package:DirectMF/common/calendar.dart';
+import 'package:DirectMF/models/mfData.dart';
+import 'package:DirectMF/models/parsedMf.dart';
+import 'package:DirectMF/main.dart';
+import 'package:DirectMF/redux/actions.dart';
+import 'package:DirectMF/redux/selectors.dart';
 
 const NAV_PRICE_OPEN_API = 'https://www.amfiindia.com/spages/NAVAll.txt';
 const UPLOAD_PDF_SERVER =
@@ -24,12 +24,21 @@ class MfApiService {
     DateTime lastSync = getLastNavSync(globalStore.state);
     if (isLastSynchPrev(lastSync)) {
       allMfNavTxt = getAllMfNavTxt(globalStore.state);
+      if (allMfNavTxt == "") {
+        allMfNavTxt = await getAllNavFromAjax();
+      }
     } else {
-      final res = await http.get(NAV_PRICE_OPEN_API);
-      globalStore.dispatch(ReloadNavPrice(res.body));
-      globalStore.dispatch(LastNavSync(DateTime.now()));
-      allMfNavTxt = res.body.toString();
+      allMfNavTxt = await getAllNavFromAjax();
     }
+    return allMfNavTxt;
+  }
+
+  static Future<String> getAllNavFromAjax() async {
+    String allMfNavTxt = "";
+    final res = await http.get(NAV_PRICE_OPEN_API);
+    globalStore.dispatch(ReloadNavPrice(res.body));
+    globalStore.dispatch(LastNavSync(DateTime.now()));
+    allMfNavTxt = res.body.toString();
     return allMfNavTxt;
   }
 

@@ -1,5 +1,5 @@
-import 'package:sink/common/exceptions.dart';
-import 'package:sink/common/validations.dart';
+import 'package:DirectMF/common/exceptions.dart';
+import 'package:DirectMF/common/validations.dart';
 import 'package:test/test.dart';
 
 void main() {
@@ -30,7 +30,7 @@ void main() {
   test('does not allow a null instead of a number', () {
     expect(() => nonNegative(null), throwsA(TypeMatcher<InvalidInput>()));
   });
-  
+
   test('does not allow a negative number', () {
     expect(() => nonNegative('-1'), throwsA(TypeMatcher<InvalidInput>()));
   });

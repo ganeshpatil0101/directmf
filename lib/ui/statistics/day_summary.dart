@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:sink/models/entry.dart';
-import 'package:sink/theme/palette.dart' as Palette;
-import 'package:sink/ui/common/amount.dart';
+import 'package:DirectMF/models/entry.dart';
+import 'package:DirectMF/theme/palette.dart' as Palette;
+import 'package:DirectMF/ui/common/amount.dart';
 
 class DaySummaryTile extends StatelessWidget {
   final DateTime _date;

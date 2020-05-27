@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:sink/models/entry.dart';
-import 'package:sink/ui/entries/entry_item.dart';
-import 'package:sink/ui/statistics/day_summary.dart';
+import 'package:DirectMF/models/entry.dart';
+import 'package:DirectMF/ui/entries/entry_item.dart';
+import 'package:DirectMF/ui/statistics/day_summary.dart';
 
 class DayGroup extends StatelessWidget {
   final List<Entry> _entries;

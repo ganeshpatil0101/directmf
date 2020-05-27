@@ -2,9 +2,9 @@ import 'dart:collection';
 
 import 'package:flutter/widgets.dart';
 import 'package:meta/meta.dart';
-import 'package:sink/models/category.dart';
-import 'package:sink/models/entry.dart';
-import 'package:sink/models/mfData.dart';
+import 'package:DirectMF/models/category.dart';
+import 'package:DirectMF/models/entry.dart';
+import 'package:DirectMF/models/mfData.dart';
 
 @immutable
 class AddEntry {

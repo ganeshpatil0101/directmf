@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_circular_chart/flutter_circular_chart.dart';
-import 'package:sink/ui/statistics/charts/chart_entry.dart';
+import 'package:DirectMF/ui/statistics/charts/chart_entry.dart';
 
 class CircularChart extends StatelessWidget {
   final _chartKey = GlobalKey<AnimatedCircularChartState>();

@@ -1,5 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:sink/models/entry.dart';
+import 'package:DirectMF/models/entry.dart';
 
 double totalExpense(List<DocumentSnapshot> snapshots) => snapshots
     .where((el) => el['type'] == EntryType.EXPENSE.index)

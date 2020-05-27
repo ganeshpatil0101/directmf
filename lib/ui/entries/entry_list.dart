@@ -2,14 +2,14 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
 import 'package:redux/redux.dart';
-import 'package:sink/common/calendar.dart';
-import 'package:sink/models/entry.dart';
-import 'package:sink/redux/selectors.dart';
-import 'package:sink/redux/state.dart';
-import 'package:sink/repository/firestore.dart';
-import 'package:sink/ui/common/progress_indicator.dart';
-import 'package:sink/ui/entries/day_entries.dart';
-import 'package:sink/ui/statistics/balance.dart';
+import 'package:DirectMF/common/calendar.dart';
+import 'package:DirectMF/models/entry.dart';
+import 'package:DirectMF/redux/selectors.dart';
+import 'package:DirectMF/redux/state.dart';
+import 'package:DirectMF/repository/firestore.dart';
+import 'package:DirectMF/ui/common/progress_indicator.dart';
+import 'package:DirectMF/ui/entries/day_entries.dart';
+import 'package:DirectMF/ui/statistics/balance.dart';
 
 class EntryList extends StatelessWidget {
   Widget build(BuildContext context) {

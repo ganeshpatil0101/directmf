@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:quiver/strings.dart';
-import 'package:sink/ui/common/text.dart';
+import 'package:DirectMF/ui/common/text.dart';
 
 class ClearableTextInput extends StatefulWidget {
   final Function(String) onChange;

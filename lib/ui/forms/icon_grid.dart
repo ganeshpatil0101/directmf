@@ -1,8 +1,8 @@
 import 'dart:collection';
 
 import 'package:flutter/material.dart';
-import 'package:sink/theme/icons.dart';
-import 'package:sink/theme/palette.dart' as Palette;
+import 'package:DirectMF/theme/icons.dart';
+import 'package:DirectMF/theme/palette.dart' as Palette;
 
 class IconGrid extends StatefulWidget {
   final Color selectedColor;

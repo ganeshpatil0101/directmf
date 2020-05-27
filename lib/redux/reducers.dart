@@ -2,13 +2,13 @@ import 'dart:collection';
 
 import 'package:flutter/material.dart';
 import 'package:quiver/strings.dart';
-import 'package:sink/common/auth.dart';
-import 'package:sink/common/calendar.dart';
-import 'package:sink/models/entry.dart';
-import 'package:sink/redux/actions.dart';
-import 'package:sink/redux/state.dart';
-import 'package:sink/repository/firestore.dart';
-import 'package:sink/theme/palette.dart';
+import 'package:DirectMF/common/auth.dart';
+import 'package:DirectMF/common/calendar.dart';
+import 'package:DirectMF/models/entry.dart';
+import 'package:DirectMF/redux/actions.dart';
+import 'package:DirectMF/redux/state.dart';
+import 'package:DirectMF/repository/firestore.dart';
+import 'package:DirectMF/theme/palette.dart';
 
 const MONTHS_IN_YEAR = 12;
 

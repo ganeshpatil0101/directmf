@@ -1,5 +1,5 @@
-import 'package:sink/common/exceptions.dart';
-import 'package:sink/models/entry.dart';
+import 'package:DirectMF/common/exceptions.dart';
+import 'package:DirectMF/models/entry.dart';
 
 String toString(dynamic e) => e.toString().split('.')[1].toLowerCase();
 

@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:quiver/strings.dart';
-import 'package:sink/common/enums.dart';
-import 'package:sink/models/category.dart';
-import 'package:sink/models/entry.dart';
-import 'package:sink/ui/common/date_picker.dart';
-import 'package:sink/ui/common/number_input.dart';
-import 'package:sink/ui/common/text_input.dart';
-import 'package:sink/ui/forms/category_grid.dart';
+import 'package:DirectMF/common/enums.dart';
+import 'package:DirectMF/models/category.dart';
+import 'package:DirectMF/models/entry.dart';
+import 'package:DirectMF/ui/common/date_picker.dart';
+import 'package:DirectMF/ui/common/number_input.dart';
+import 'package:DirectMF/ui/common/text_input.dart';
+import 'package:DirectMF/ui/forms/category_grid.dart';
 
 class EntryForm extends StatefulWidget {
   final Function(Entry) onSave;

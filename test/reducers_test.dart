@@ -1,13 +1,13 @@
 import 'dart:collection';
 
 import 'package:flutter/material.dart';
-import 'package:sink/common/auth.dart';
-import 'package:sink/models/category.dart';
-import 'package:sink/models/entry.dart';
-import 'package:sink/redux/actions.dart';
-import 'package:sink/redux/reducers.dart';
-import 'package:sink/redux/state.dart';
-import 'package:sink/theme/palette.dart';
+import 'package:DirectMF/common/auth.dart';
+import 'package:DirectMF/models/category.dart';
+import 'package:DirectMF/models/entry.dart';
+import 'package:DirectMF/redux/actions.dart';
+import 'package:DirectMF/redux/reducers.dart';
+import 'package:DirectMF/redux/state.dart';
+import 'package:DirectMF/theme/palette.dart';
 import 'package:test/test.dart';
 import 'package:uuid/uuid.dart';
 
@@ -300,7 +300,8 @@ main() {
     expect(result.authStatus, AuthenticationStatus.LOGGED_IN);
   });
 
-  test('SetUserDetails sets status to anonymous when user id does not exist', () {
+  test('SetUserDetails sets status to anonymous when user id does not exist',
+      () {
     var state = AppState(userId: Uuid().v4());
 
     var result = reduce(state, SetUserDetails(id: "", email: ""));

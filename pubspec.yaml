@@ -1,5 +1,5 @@
-name: sink
-description: Easily verify that you&#x27;re spending more than you can afford
+name: DirectMF
+description: Track Your Direct Mutual
 
 dependencies:
   flutter:

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:sink/ui/common/dot.dart';
-import 'package:sink/ui/statistics/charts/chart_entry.dart';
-import 'package:sink/ui/statistics/month_summary.dart';
+import 'package:DirectMF/ui/common/dot.dart';
+import 'package:DirectMF/ui/statistics/charts/chart_entry.dart';
+import 'package:DirectMF/ui/statistics/month_summary.dart';
 
 import 'circular_chart.dart';
 import 'horizontal_bar_chart.dart';

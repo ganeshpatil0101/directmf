@@ -3,18 +3,18 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:redux/redux.dart';
-import 'package:sink/common/auth.dart';
-import 'package:sink/main.dart';
-import 'package:sink/models/category.dart';
-import 'package:sink/models/entry.dart';
-import 'package:sink/models/mfData.dart';
-import 'package:sink/redux/actions.dart';
-import 'package:sink/redux/selectors.dart';
-import 'package:sink/redux/state.dart';
-import 'package:sink/services/mf_api_service.dart';
-import 'package:sink/ui/home.dart';
+import 'package:DirectMF/common/auth.dart';
+import 'package:DirectMF/main.dart';
+import 'package:DirectMF/models/category.dart';
+import 'package:DirectMF/models/entry.dart';
+import 'package:DirectMF/models/mfData.dart';
+import 'package:DirectMF/redux/actions.dart';
+import 'package:DirectMF/redux/selectors.dart';
+import 'package:DirectMF/redux/state.dart';
+import 'package:DirectMF/services/mf_api_service.dart';
+import 'package:DirectMF/ui/home.dart';
 
-class SinkMiddleware extends MiddlewareClass<AppState> {
+class DirectMFMiddleware extends MiddlewareClass<AppState> {
   final GlobalKey<NavigatorState> navigatorKey;
   final Authentication auth;
 
@@ -22,7 +22,8 @@ class SinkMiddleware extends MiddlewareClass<AppState> {
   StreamSubscription<QuerySnapshot> mfDataListener;
   StreamSubscription<QuerySnapshot> entryListener;
 
-  SinkMiddleware(this.navigatorKey) : this.auth = FirebaseEmailAuthentication();
+  DirectMFMiddleware(this.navigatorKey)
+      : this.auth = FirebaseEmailAuthentication();
 
   @override
   void call(Store<AppState> store, dynamic action, NextDispatcher next) async {
@@ -92,15 +93,12 @@ class SinkMiddleware extends MiddlewareClass<AppState> {
     } else if (action is LastNavSync) {
       final database = getRepository(store.state);
       database.updateLastNavSync(action.lastNavSync).then((res) {
-        print("res ---- >  ");
         store.dispatch(SetLastNavSync(action.lastNavSync));
       }).catchError((e) => print(e));
-    }
-    /*else if (action is ReloadNavPrice) {
+    } else if (action is ReloadNavPrice) {
       final navDataTxt = await MfApiService.getAllMfNavPrice();
       reloadNavPrice(store, navDataTxt);
-    }*/
-
+    }
     next(action);
   }
 
@@ -146,7 +144,7 @@ class SinkMiddleware extends MiddlewareClass<AppState> {
 
   void reloadNavPrice(Store<AppState> store, String allMfNavPriceTxt) {
     store.dispatch(ReloadNavPrice(allMfNavPriceTxt));
-    store.dispatch(LastNavSync(DateTime.now()));
+    //store.dispatch(LastNavSync(DateTime.now()));
   }
 
   void loadMonths(Store<AppState> store, QuerySnapshot event) {

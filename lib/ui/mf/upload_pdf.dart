@@ -4,8 +4,8 @@ import 'dart:io';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:quiver/strings.dart';
-import 'package:sink/services/mf_api_service.dart';
-import 'package:sink/ui/common/buttons.dart';
+import 'package:DirectMF/services/mf_api_service.dart';
+import 'package:DirectMF/ui/common/buttons.dart';
 
 class UploadPdf extends StatefulWidget {
   static const route = '/uploadPdf';

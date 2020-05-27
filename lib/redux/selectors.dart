@@ -1,14 +1,14 @@
 import 'dart:collection';
 
 import 'package:flutter/material.dart';
-import 'package:sink/common/auth.dart';
-import 'package:sink/common/calendar.dart';
-import 'package:sink/common/exceptions.dart';
-import 'package:sink/models/category.dart';
-import 'package:sink/models/entry.dart';
-import 'package:sink/models/mfData.dart';
-import 'package:sink/redux/state.dart';
-import 'package:sink/repository/firestore.dart';
+import 'package:DirectMF/common/auth.dart';
+import 'package:DirectMF/common/calendar.dart';
+import 'package:DirectMF/common/exceptions.dart';
+import 'package:DirectMF/models/category.dart';
+import 'package:DirectMF/models/entry.dart';
+import 'package:DirectMF/models/mfData.dart';
+import 'package:DirectMF/redux/state.dart';
+import 'package:DirectMF/repository/firestore.dart';
 
 Entry getLastRemoved(AppState state) => state.removed.last;
 

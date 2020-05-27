@@ -1,16 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
 import 'package:redux/redux.dart';
-import 'package:sink/models/category.dart';
-import 'package:sink/models/entry.dart';
-import 'package:sink/models/mfData.dart';
-import 'package:sink/redux/actions.dart';
-import 'package:sink/redux/selectors.dart';
-import 'package:sink/redux/state.dart';
-import 'package:sink/theme/icons.dart';
-import 'package:sink/ui/common/amount.dart';
-import 'package:sink/ui/mf/addEditMfPage.dart';
-import 'package:sink/ui/mf/mf_item_details.dart';
+import 'package:DirectMF/models/entry.dart';
+import 'package:DirectMF/models/mfData.dart';
+import 'package:DirectMF/redux/state.dart';
+import 'package:DirectMF/ui/common/amount.dart';
+import 'package:DirectMF/ui/mf/addEditMfPage.dart';
 
 class MfItem extends StatelessWidget {
   final Key key;
@@ -46,9 +41,16 @@ class MfItem extends StatelessWidget {
                 ),*/
               Flexible(
                 child: ListTile(
+                    contentPadding: EdgeInsets.only(bottom: 10),
                     title: Text(mf.name),
-                    subtitle:
-                        Text("Invested = ${mf.amtInvstd.toStringAsFixed(2)}"),
+                    subtitle: Column(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: <Widget>[
+                        Text("INV : ${mf.amtInvstd.toStringAsFixed(2)}"),
+                        Text("NAV : ${mf.nav.toStringAsFixed(2)}")
+                      ],
+                    ),
                     //subtitle: MfItemDetails(mf.nav, mf.curValue, mf.amtInvstd),
                     trailing: VisualizedAmount(
                       amount: mf.curValue - mf.amtInvstd,

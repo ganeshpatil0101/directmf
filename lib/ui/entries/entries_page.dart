@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
 import 'package:redux/redux.dart';
-import 'package:sink/redux/selectors.dart';
-import 'package:sink/redux/state.dart';
-import 'package:sink/ui/common/progress_indicator.dart';
-import 'package:sink/ui/entries/entry_list.dart';
+import 'package:DirectMF/redux/selectors.dart';
+import 'package:DirectMF/redux/state.dart';
+import 'package:DirectMF/ui/common/progress_indicator.dart';
+import 'package:DirectMF/ui/entries/entry_list.dart';
 
 class EntriesPage extends StatelessWidget {
   @override

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:sink/theme/palette.dart' as Palette;
+import 'package:DirectMF/theme/palette.dart' as Palette;
 
 /// Displays expense/income amount. Depending on type of entry, shows an icon
 /// indicating whether it is an expense or an income.
@@ -16,7 +16,7 @@ class VisualizedAmount extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var actualStyle = style ?? Theme.of(context).textTheme.body1;
+    var actualStyle = style ?? Theme.of(context).textTheme.body2;
     return Row(
       mainAxisSize: MainAxisSize.min,
       children: <Widget>[

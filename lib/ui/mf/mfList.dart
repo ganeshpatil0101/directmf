@@ -1,17 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
-import 'package:sink/models/mfData.dart';
-import 'package:sink/redux/selectors.dart';
-import 'package:sink/redux/state.dart';
+import 'package:DirectMF/models/mfData.dart';
+import 'package:DirectMF/redux/selectors.dart';
+import 'package:DirectMF/redux/state.dart';
 import 'package:redux/redux.dart';
-import 'package:sink/theme/icons.dart';
-import 'package:sink/ui/categories/category.dart';
+import 'package:DirectMF/theme/icons.dart';
+import 'package:DirectMF/ui/categories/category.dart';
 // import 'package:flutter_redux/flutter_redux.dart';
 // import 'package:redux/redux.dart';
-// import 'package:sink/models/category.dart';
-// import 'package:sink/redux/selectors.dart';
-// import 'package:sink/redux/state.dart';
-// import 'package:sink/theme/icons.dart';
+// import 'package:DirectMF/models/category.dart';
+// import 'package:DirectMF/redux/selectors.dart';
+// import 'package:DirectMF/redux/state.dart';
+// import 'package:DirectMF/theme/icons.dart';
 
 class MfList extends StatelessWidget {
   static const route = '/mflist';

@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
 import 'package:redux/redux.dart';
-import 'package:sink/redux/actions.dart';
-import 'package:sink/redux/selectors.dart';
-import 'package:sink/redux/state.dart';
-import 'package:sink/ui/animation/bars.dart';
-import 'package:sink/ui/statistics/charts/chart_entry.dart';
+import 'package:DirectMF/redux/actions.dart';
+import 'package:DirectMF/redux/selectors.dart';
+import 'package:DirectMF/redux/state.dart';
+import 'package:DirectMF/ui/animation/bars.dart';
+import 'package:DirectMF/ui/statistics/charts/chart_entry.dart';
 
 const HEIGHT_PER_CHARACTER = 8;
 

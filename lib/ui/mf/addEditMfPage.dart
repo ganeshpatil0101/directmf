@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
-import 'package:sink/models/mfData.dart';
-import 'package:sink/redux/state.dart';
-import 'package:sink/redux/actions.dart';
+import 'package:DirectMF/models/mfData.dart';
+import 'package:DirectMF/redux/state.dart';
+import 'package:DirectMF/redux/actions.dart';
 import 'package:redux/redux.dart';
-import 'package:sink/ui/mf/addMf.dart';
+import 'package:DirectMF/ui/mf/addMf.dart';
 
 class EditMfPageArgs {
   final MFData editMfData;
