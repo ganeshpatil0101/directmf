@@ -25,7 +25,7 @@ Read SMS
 2. 
 
 UI Improvements
-1. Remove Black screen with loading icon while fetching NAV price
+1. Remove Black screen with loading icon while fetching NAV price - Done
 2. make mfId field readonly when in edit mode
 3. Change Login Screen UI Colour
 3. MF detail screen before edit screen

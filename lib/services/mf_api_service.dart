@@ -7,6 +7,7 @@ import 'package:DirectMF/models/parsedMf.dart';
 import 'package:DirectMF/main.dart';
 import 'package:DirectMF/redux/actions.dart';
 import 'package:DirectMF/redux/selectors.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 const NAV_PRICE_OPEN_API = 'https://www.amfiindia.com/spages/NAVAll.txt';
 const UPLOAD_PDF_SERVER =
@@ -17,6 +18,16 @@ class MfApiService {
     return MfApiService.getUpdatedNavPrice().then((allMfNavTxt) {
       return MfApiService._parseToMfData(allMfNavTxt, mfId);
     });
+  }
+
+  static storeLastSync(DateTime date) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    prefs.setString('lastSync', date.toString());
+  }
+
+  static getStoredLastSync() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    return prefs.getString('lastSync') ?? "";
   }
 
   static Future<String> getUpdatedNavPrice() async {

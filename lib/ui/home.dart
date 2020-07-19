@@ -77,6 +77,10 @@ class HomePageState extends State<HomePage>
                 // if not matched then update the lastNavSynch in DB
                 // the dispatch refresh all nav price request
                 // if lastlastnav date and todays date same then nothing will happen
+
+                // TODO Store and get data from sharedspace
+                //DateTime ls = DateTime.parse(MfApiService.getStoredLastSync());
+                //print(ls);
                 DateTime lastSync = getLastNavSync(globalStore.state);
                 if (isLastSynchPrev(lastSync)) {
                   print(" Nav price is updated no need to update again");

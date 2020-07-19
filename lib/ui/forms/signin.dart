@@ -7,6 +7,7 @@ import 'package:DirectMF/redux/state.dart';
 import 'package:DirectMF/ui/common/buttons.dart';
 import 'package:DirectMF/ui/common/form_errors.dart';
 import 'package:DirectMF/ui/common/text_input.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class SignInForm extends StatefulWidget {
   @override
@@ -46,14 +47,14 @@ class SignInFormState extends State<SignInForm> {
             child: Padding(
               padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
               child: Text('Smart Direct MF',
-                  style: Theme.of(context).textTheme.headline),
+                  style: Theme.of(context).textTheme.headline3),
             ),
           ),
           Center(
             child: Padding(
               padding: const EdgeInsets.all(10.0),
               child:
-                  Text('Sign In', style: Theme.of(context).textTheme.headline),
+                  Text('Sign In', style: Theme.of(context).textTheme.headline5),
             ),
           ),
           EmailFormField(
@@ -101,9 +102,11 @@ class _SignInViewModel {
 
   static _SignInViewModel fromState(Store<AppState> store) {
     return _SignInViewModel(
-      signIn: (String email, String password) => store.dispatch(
-        SignIn(email: email, password: password),
-      ),
+      signIn: (String email, String password) async {
+        store.dispatch(SignIn(email: email, password: password));
+        SharedPreferences prefs = await SharedPreferences.getInstance();
+        prefs.setString('email', email);
+      },
       signInInProgress: isSignInInProgress(store.state),
       errorMessage: getAuthenticationErrorMessage(store.state),
     );

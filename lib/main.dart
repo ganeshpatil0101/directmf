@@ -18,10 +18,12 @@ import 'package:DirectMF/ui/mf/addEditMfPage.dart';
 import 'package:DirectMF/ui/mf/addMf.dart';
 import 'package:DirectMF/ui/mf/mfList.dart';
 import 'package:DirectMF/ui/mf/upload_pdf.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 Store globalStore;
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
   final navigatorKey = GlobalKey<NavigatorState>();
   globalStore = Store<AppState>(
     reduce,
@@ -30,15 +32,19 @@ void main() {
     middleware: [DirectMFMiddleware(navigatorKey)],
   );
   globalStore.dispatch(RetrieveUser());
-
-  runApp(DirectMF(navigatorKey, globalStore));
+  SharedPreferences prefs = await SharedPreferences.getInstance();
+  var email = prefs.getString('email');
+  print('====>');
+  print(email);
+  runApp(DirectMF(navigatorKey, globalStore, (email == null) ? false : true));
 }
 
 class DirectMF extends StatelessWidget {
   final GlobalKey<NavigatorState> navigatorKey;
   final Store<AppState> store;
+  final bool navigateToHome;
 
-  DirectMF(this.navigatorKey, this.store);
+  DirectMF(this.navigatorKey, this.store, this.navigateToHome);
 
   @override
   Widget build(BuildContext context) {
@@ -60,7 +66,8 @@ class DirectMF extends StatelessWidget {
           EditExpensePage.route: (context) => EditExpensePage(),
           UploadPdf.route: (context) => UploadPdf()
         },
-        initialRoute: InitialPage.route,
+        initialRoute:
+            (this.navigateToHome) ? HomeScreen.route : InitialPage.route,
       ),
     );
   }

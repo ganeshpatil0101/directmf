@@ -13,6 +13,7 @@ import 'package:DirectMF/redux/selectors.dart';
 import 'package:DirectMF/redux/state.dart';
 import 'package:DirectMF/services/mf_api_service.dart';
 import 'package:DirectMF/ui/home.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class DirectMFMiddleware extends MiddlewareClass<AppState> {
   final GlobalKey<NavigatorState> navigatorKey;
@@ -42,7 +43,11 @@ class DirectMFMiddleware extends MiddlewareClass<AppState> {
           .signOut()
           .then((_) =>
               navigatorKey.currentState.pushReplacementNamed(InitialPage.route))
-          .then((value) => store.dispatch(SetUserDetails(id: "", email: "")));
+          .then((value) async {
+        store.dispatch(SetUserDetails(id: "", email: ""));
+        SharedPreferences prefs = await SharedPreferences.getInstance();
+        prefs.setString('email', null);
+      });
     } else if (action is Register) {
       store.dispatch(StartRegistration());
       auth
@@ -103,7 +108,7 @@ class DirectMFMiddleware extends MiddlewareClass<AppState> {
   }
 
   void attemptUserRetrieval(Store<AppState> store, FirebaseUser user) {
-    if (user != null && user.isEmailVerified) {
+    if (user != null) {
       final userId = user.uid.toString();
       store.dispatch(SetUserDetails(id: userId, email: user.email));
       store.dispatch(InitializeDatabase(user.uid));
