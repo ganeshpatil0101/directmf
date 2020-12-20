@@ -56,8 +56,10 @@ class AddFmFormState extends State<AddMfForm> {
   void updateCurrentValuation() {
     if (unitsCtrl.text != "" && navCtrl.text != "") {
       double curVal = double.parse(unitsCtrl.text) * double.parse(navCtrl.text);
-      curVal = curVal - this.amtInvstd;
+      //curVal = curVal - this.amtInvstd;
       curValController.text = curVal.toStringAsFixed(2);
+      //print("======================");
+      //print(curVal);
     }
   }
 

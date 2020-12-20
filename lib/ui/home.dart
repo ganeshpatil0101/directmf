@@ -14,6 +14,7 @@ import 'package:DirectMF/ui/mf/addMf.dart';
 import 'package:DirectMF/ui/mf/entity_mf_list.dart';
 import 'package:DirectMF/ui/mf/upload_pdf.dart';
 import 'package:DirectMF/ui/statistics/statistics_page.dart';
+//import 'package:sms_retriever/sms_retriever.dart';
 
 class HomeScreen extends StatelessWidget {
   static const route = '/home';
@@ -35,11 +36,21 @@ class HomePageState extends State<HomePage>
   TabController _tabController;
   bool enableRefresh = true;
   bool showLoading = false;
+  String _smsCode = "";
   @override
   void initState() {
     super.initState();
     _scaffoldKey = GlobalKey<ScaffoldState>();
     _tabController = TabController(vsync: this, length: 2);
+  }
+
+  getCode(String sms) {
+    if (sms != null) {
+      final intRegex = RegExp(r'\d+', multiLine: true);
+      final code = intRegex.allMatches(sms).first.group(0);
+      return code;
+    }
+    return "NO SMS";
   }
 
   @override
@@ -67,6 +78,14 @@ class HomePageState extends State<HomePage>
         centerTitle: true,
         title: Text('Smart Direct MF'),
         actions: <Widget>[
+          // IconButton(
+          //     icon: Icon(Icons.access_alarms),
+          //     onPressed: () async {
+          //       // String smsCode = await SmsRetriever.startListening();
+          //       // print("===============================");
+          //       // print(smsCode);
+          //       // _smsCode = getCode(smsCode);
+          //     }),
           IconButton(
               disabledColor: Colors.grey,
               iconSize: 28.0,
@@ -128,6 +147,13 @@ class HomePageState extends State<HomePage>
         controller: _tabController,
         children: <Widget>[
           //EntriesPage(),
+          // FutureBuilder(
+          //   builder: (context, data) {
+          //     return Text('SIGNATURE: ${data.data}');
+          //   },
+          //   // future: SmsRetriever.getAppSignature(),
+          // ),
+          // Text('SMS CODE: $_smsCode \n'),
           (showLoading) ? PaddedCircularProgressIndicator() : EntityMfList(),
           StatisticsPage()
         ],
@@ -150,7 +176,9 @@ class HomePageState extends State<HomePage>
                       label: 'Upload',
                       onPressed: () {
                         Navigator.of(context).pop();
-                        Navigator.pushNamed(context, UploadPdf.route);
+                        // Temporary Disabled
+                        // Navigator.of(context).pop();
+                        // Navigator.pushNamed(context, UploadPdf.route);
                       },
                     ),
                     popup.button(
